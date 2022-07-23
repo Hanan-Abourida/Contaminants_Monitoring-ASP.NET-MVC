@@ -1,0 +1,89 @@
+﻿@model Contaminants_Monitoring.Models.PesticideResidue
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PesticideResidue</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PestResName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PestResName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PestResCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PestResCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ARFD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ARFD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Banned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Banned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UOM.unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UOM.unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UOM1.unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UOM1.unit)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

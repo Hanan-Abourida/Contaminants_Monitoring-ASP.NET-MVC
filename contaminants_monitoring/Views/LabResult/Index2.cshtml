@@ -1,0 +1,157 @@
+﻿ @model  IEnumerable<Contaminants_Monitoring.Models.LabSample>
+    @{
+        ViewBag.Title = "Index2";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Table of results</h2>
+
+    <table class="table" style="white-space: nowrap;">
+        <tr style="background-color: #346cb0;
+color: white;">
+            <th>
+                @Html.DisplayNameFor(model => model.SampleNb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LabSampleNb)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AnalysisDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnalysisPortion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnalysisType)
+            </th>
+            <th>
+                @Html.DisplayName("Final Con")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fkConUOM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LOD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LOQ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Uncertainty)
+            </th>
+            <th>
+                @Html.DisplayName(" % ")
+            </th>
+            <th>
+                @Html.DisplayName("Extraction")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeterminativeMethod)
+            </th>
+            <th>
+                @Html.DisplayName("Molecule")
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Mycotoxin.MycotoxinName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PesticideResidue.PestResName)
+        </th>*@
+            <th>
+                @Html.DisplayName("Conformity")
+            </th>
+            <th>
+                @Html.DisplayName("Violation Type")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleNb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LabSampleNb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnalysisDate)
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.AnalysisPortion, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+            @*@Html.DisplayFor(modelItem => item.AnalysisPortion)*@
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.AnalysisType, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+            @*@Html.DisplayFor(modelItem => item.AnalysisType)*@
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.ConFinal, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+            @*@Html.DisplayFor(modelItem => item.ConFinal)*@
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.LOD, new { htmlAttributes = new { @class = "form-control form-control-sm" , @style = "width: 60px !important; display: inline - block!important; " } })
+            @*@Html.DisplayFor(modelItem => item.fkConUOM)*@
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.LOD, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+            @*@Html.DisplayFor(modelItem => item.LOD)*@
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.LOQ, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+            @*@Html.DisplayFor(modelItem => item.LOQ)*@
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.Uncertainty, new { htmlAttributes = new { @class = "form-control form-control-sm", @style = "width: 50px !important; display: inline - block!important; " } })
+            @*@Html.DisplayFor(modelItem => item.Uncertainty)*@
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.UncertaintyPercent, new { htmlAttributes = new { @class = "form-control form-control-sm", @style= "width: 40px !important; display: inline - block!important; " } })
+            @*@Html.DisplayFor(modelItem => item.UncertaintyPercent)*@
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.ExtractionMethod, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+            @*@Html.DisplayFor(modelItem => item.ExtractionMethod)*@
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.DeterminativeMethod, new { htmlAttributes = new { @class = "form-control form-control-sm", @style = "width: 80px !important; display: inline - block!important; " } })
+            @*@Html.DisplayFor(modelItem => item.DeterminativeMethod)*@
+        </td>
+
+        <td>
+
+            @if (item.ContaminantType.ContaminantCode == "R")
+            {
+                @Html.EditorFor(modelItem => item.PesticideResidue.PestResName, new { htmlAttributes = new { @class = "form-control form-control-sm", @style = "width: 100px !important; display: inline - block!important; " } })
+                @*@Html.DisplayFor(modelItem => item.PesticideResidue.PestResName)*@
+            }
+            else if (item.ContaminantType.ContaminantCode == "AF")
+            {
+                @Html.EditorFor(modelItem => item.Mycotoxin.MycotoxinName, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @*@Html.DisplayFor(modelItem => item.Mycotoxin.MycotoxinName)*@
+            }
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Mycotoxin.MycotoxinName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PesticideResidue.PestResName)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.ViolationType)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.ViolationType)*@
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.pkLabSampleId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.pkLabSampleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.pkLabSampleId })
+        </td>*@
+    </tr>
+        }
+
+    </table>
+

@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "RiskToolFile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Risk Assessment Tool</li>
+    </ol>
+</nav>
+
+<h3 style="padding-top: 20px; color: dimgray;">Risk Assessment Tool</h3>
+
+<hr />
+<p><b>Please click the button to download the risk assessment excel file :</b></p>
+
+@Html.ActionLink("Download Excel File", "DownloadRiskToolFile", "Output", routeValues: null, htmlAttributes: new { @class = "btn btn-outline-success" })
+

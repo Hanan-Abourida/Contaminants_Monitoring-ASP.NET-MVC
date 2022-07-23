@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Contaminants_Monitoring.Models.SamplingPlan>
+
+@{
+    ViewBag.Title = "SamplingPlansList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" target="_self">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Library</li>
+        <li class="breadcrumb-item active" aria-current="page">Sampling Plans</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">List of available sampling plans</h3>
+
+<hr />
+
+<p>
+    @Html.ActionLink("Create New", "SamplingPlanCreate")
+</p>
+<table class="table table-hover table-responsive" style="display:table;">
+    <tr style="background-color: #346cb0 !important;color: white;">
+        <th>
+            @Html.DisplayName("Sampling Plan Code")
+        </th>
+        <th>
+            @Html.DisplayName("Description")
+        </th>
+        <th>
+            @Html.DisplayName("Short Code")
+        </th>
+        <th> @Html.DisplayName("Actions")</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SamplingPlanCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SamplingPlanDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortCode)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditSamplingPlan", new { id = item.pkSamplingPlanId }) |
+                @Html.ActionLink("Delete", "DeleteSamplingPlan", new { id = item.pkSamplingPlanId })
+            </td>
+        </tr>
+    }
+
+</table>

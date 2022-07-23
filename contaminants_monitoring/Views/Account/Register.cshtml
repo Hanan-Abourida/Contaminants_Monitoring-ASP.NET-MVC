@@ -1,0 +1,100 @@
+﻿@model Contaminants_Monitoring.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" target="_self">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Administration</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Register New User Form</h3>
+
+<hr />
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @*<h4>Fill the information</h4>
+    <br/>*@
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group row">
+        @Html.LabelFor(m => m.userName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.userName, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.phoneNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.phoneNumber, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Center, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Center, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.Label("Assigned Role", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("selectedRole", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...", new { @id="ddlRolesId", @class = "form-control form-control-sm" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.Label("Laboratory", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("LabId", (IEnumerable<SelectListItem>)ViewBag.Labs, "Select ...", new { @id = "ddlLabsId", @class = "form-control form-control-sm" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-success float-right" value="Register" style="" />
+        </div>
+    </div>
+}
+<script type="text/javascript">
+            window.onload = function () {
+                $("#ddlLabsId").prop("disabled", true);
+
+                $(document).ready(function () {
+                    $("#ddlRolesId").change(function () {
+                        var selectedRole = $("#ddlRolesId").val();
+                        if (selectedRole == 'Lab Staff') {
+                            $("#ddlLabsId").prop("disabled", false);
+                        }
+                        else {
+                            $("#ddlLabsId").prop("disabled", true);
+                            $("#ddlLabsId").val($("#ddlLabsId").find("option:first").val());
+                        }
+                    });
+                });
+            };
+
+            
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,164 @@
+﻿@model Contaminants_Monitoring.ViewModels.DesignViewModel
+@{
+    ViewBag.Title = "SamplesCreation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Laboratory Samples</li>
+        <li class="breadcrumb-item active" aria-current="page">Generate</li>
+    </ol>
+</nav>
+
+<h3 style="padding-top: 20px; color: dimgray;">Samples Codification</h3>
+
+<hr />
+@using (Html.BeginForm("SamplesCreation", "Generate", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+            @Html.AntiForgeryToken()
+            <p><b>Please fill the fields to create set of samples with identity codification:</b></p>
+        
+            <div class="form-group row" >
+        <div class="col-md-10">
+            @Html.ActionLink("Samples Calculation", "SamplesCalculation", "Generate", routeValues: null, htmlAttributes: new { @class = "btn btn-outline-success float-right" })
+            @*@Html.ActionLink("All Generated Samples", "AllSamples", "Home", routeValues: null, htmlAttributes: new { @class = "btn btn-outline-success float-right" })*@
+            <input type="submit" value="Generate" class="btn btn-success btn-small" style="float:right;margin-right:0.5em;" />
+
+        </div>
+    </div>
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group row">
+            @Html.Label("Sampling Plan: ", new { @class = "control-label col-md-3" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(m => m.selectedSamplingPlanId, new SelectList(Model.samplingPlans, "pkSamplingPlanId", "SamplingPlanCode"), "select", new { @class = "form-control form-control-sm", id = "planChosenId" })
+            </div>
+            @Html.ActionLink(" + New Sample Plan", "SamplingPlanCreate", "Library")
+        </div>
+        <div class="form-group row">
+            @Html.Label("Specify Commodity ", new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(m => m.selectedCommodityId, new SelectList(Model.commodities, "pkCommodityId", "CommodityName"), "select", new { @class = "form-control form-control-sm", id = "CommodityChosenId" })
+                @Html.ValidationMessageFor(model => model.selectedCommodityId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.Label("Specify Contaminant Type ", new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(m => m.selectedContaminantTypeId, new SelectList(Model.contaminantTypes, "pkContaminantTypeId", "ContaminantName"), "select", new { @class = "form-control form-control-sm", id = "ContaminantChosenId" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.Label("Sampling Reason: ", new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(m => m.selectedSamplingReasonId, new SelectList(Model.samplingReasons, "pkSamplingReasonId", "SamplingReasonText"), "select", new { @class = "form-control form-control-sm", id = "reasonChosenId" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.Label("Governorate ", new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(m => m.selectedGovernorateId, new SelectList(Model.governorates, "pkGovernorateId", "GovernorateName"), "select", new { @class = "form-control form-control-sm", id = "GovChosenId" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.Label("Caza ", new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(m => m.selectedCazaId, new SelectList(Model.cazas, "pkCazaId", "CazaName"), "select", new { @class = "form-control form-control-sm", id = "CazaChosenId" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.Label("Samples Size ", new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.SamplesSize, new { @class = "form-control form-control-sm" })
+                @Html.ValidationMessageFor(model => model.SamplesSize, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.Label("Notes", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-7">
+                <style>
+                    textarea {
+                        max-width: 100%;
+                        border: 1px solid lightgrey;
+                    }
+                </style>
+                @Html.TextAreaFor(model => model.Notes, 7, 100, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+            </div>
+        </div>
+
+    </div>
+}
+
+<h4>Generated Samples: </h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Sample Identity Code")
+        </th>
+        <th>
+            @Html.DisplayName("Commodity")
+        </th>
+        <th>
+            @Html.DisplayName("Contaminant Type")
+        </th>
+        <th>
+            @Html.DisplayName("Governorate")
+        </th>
+        <th>
+            @Html.DisplayName("Caza")
+        </th>
+        <th>
+            @Html.DisplayName("Notes")
+        </th>
+        <th>
+            @Html.DisplayName("Collector")
+        </th>
+        <th>
+            @Html.DisplayName("Laboratory")
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.generatedSamplesViews != null)
+    {
+        foreach (var item in Model.generatedSamplesViews)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SampleIdentityCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.commodity.CommodityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContaminantType.ContaminantName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.governorate.GovernorateName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.caza.CazaName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Collector)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.laboratory)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.fkLabSampleId }) @*|
+                    @Html.ActionLink("Delete", "Delete", new { id = item.fkLabSampleId })*@
+                </td>
+            </tr>
+        }
+    }
+</table>
+

@@ -1,0 +1,75 @@
+﻿@model Contaminants_Monitoring.Models.PesticideResidue
+
+@{
+    ViewBag.Title = "Pesticide Residue";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="padding-top: 20px; color: dimgray;"> @Html.DisplayFor(model => model.PestResName)</h3>
+
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt style="display:inline-block">
+            @Html.DisplayName("Pesticide Residue Name")
+        </dt>
+
+        <dd style="display:inline-block">
+            @Html.DisplayFor(model => model.PestResName)
+        </dd>
+        <br />
+        <dt style="display:inline-block">
+            @Html.DisplayName("Code")
+        </dt>
+
+        <dd style="display:inline-block">
+            @Html.DisplayFor(model => model.PestResCode)
+        </dd>
+        <br />
+        <dt style="display:inline-block">
+            @Html.DisplayNameFor(model => model.ADI)
+        </dt>
+
+        <dd style="display:inline-block">
+            @Html.DisplayFor(model => model.ADI)
+        </dd>
+        <br />
+        <dt style="display:inline-block">
+            @Html.DisplayNameFor(model => model.ADI_Unit)
+        </dt>
+
+        <dd style="display:inline-block">
+            @Html.DisplayFor(model => model.ADI_Unit)
+        </dd>
+        <br />
+        <dt style="display:inline-block">
+            @Html.DisplayNameFor(model => model.ARFD)
+        </dt>
+
+        <dd style="display:inline-block">
+            @Html.DisplayFor(model => model.ARFD)
+        </dd>
+        <br />
+        <dt style="display:inline-block">
+            @Html.DisplayNameFor(model => model.ARFD_Unit)
+        </dt>
+
+        <dd style="display:inline-block">
+            @Html.DisplayFor(model => model.ARFD_Unit)
+        </dd>
+        <br />
+        <dt style="display:inline-block">
+            @Html.DisplayNameFor(model => model.Reference)
+        </dt>
+
+        <dd style="display:inline-block">
+            @Html.DisplayFor(model => model.Reference)
+        </dd>
+
+    </dl>
+</div>
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.pkPesticideResidueId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

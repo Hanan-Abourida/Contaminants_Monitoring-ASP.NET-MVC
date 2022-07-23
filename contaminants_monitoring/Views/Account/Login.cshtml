@@ -1,0 +1,181 @@
+﻿@using Contaminants_Monitoring.Models
+@model LoginViewModel
+@{
+
+
+    Layout = null;
+
+    ViewBag.Title = "Log in";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<style>
+    body {
+        background-color: #e9ecef;
+    }
+    .main-content {
+        width: 50%;
+        border-radius: 20px;
+        box-shadow: 0 5px 5px rgba(0,0,0,.4);
+        margin: 5em auto;
+        display: flex;
+    }
+
+    .company__info {
+        /*        background-color: #346cb0;*/
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: #fff;
+        background: linear-gradient(190deg, rgb(2, 0, 36) 0%, rgb(52, 240, 176) 0%, rgb(52, 154, 176) 30%, rgb(52, 108, 176) 100%, rgb(52, 108, 176) 100%)
+    }
+
+    .fa-android {
+        font-size: 3em;
+    }
+
+    .row > h2 {
+        color: #346cb0;
+    }
+
+    .login_form {
+        background-color: #fff;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-top: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+    }
+
+    form {
+        padding: 0 2em;
+    }
+
+    .form__input {
+        width: 100%;
+        border: 0px solid transparent;
+        border-radius: 0;
+        border-bottom: 1px solid #aaa;
+        padding: 1em .5em .5em;
+        padding-left: 2em;
+        outline: none;
+        margin: 1.5em auto;
+        transition: all .5s ease;
+    }
+
+        .form__input:focus {
+            border-bottom-color: #346cb0;
+            box-shadow: 0 0 5px rgba(0,80,80,.4);
+            border-radius: 4px;
+        }
+
+    .btn {
+        transition: all .5s ease;
+        width: 70%;
+        border-radius: 30px;
+        color: #346cb0;
+        font-weight: 600;
+        background-color: #fff;
+        border: 1px solid #346cb0;
+        margin-top: 1.5em;
+        margin-bottom: 1em;
+    }
+
+        .btn:hover, .btn:focus {
+            background-color: #346cb0;
+            color: #fff;
+        }
+    .row.login-footer {
+        color: gray;
+        font-size: small;
+    }
+</style>
+<div class="container-fluid" >
+    <br />
+    <br />
+    <h5 class="company_title text-center" style=" margin-bottom: -3em !important; color: #b7b7b7; font-weight: bold; animation: ease-in;">
+        Food Contaminants Monitoring System
+    </h5>
+    <div class="row main-content text-center">
+        <div class="col-md-4 text-center company__info">
+            <span class="company__logo"> 
+                <img src="~/Content/images/FAO logos En white 3-02.png" style="width:100%"/>
+                <!--<h2 style="margin-top:1em;">-->
+                @*<img src="~/Content/images/FAO_logos_3.png" width="200" height="100" />*@
+                <!--<br /><br />-->
+                @*<img src="~/Content/images/moa_landing.png" width="200" height="100" />*@
+                @*<span class="fa fa-android"></span>*@
+                <!--</h2>-->
+            </span>
+
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-5 col-md-6"></div>
+                    <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">
+                        <img src="~/Content/images/ministry-logo.jpg" width="200" height="100" />
+                    </div>
+                </div>
+                  
+                <div class="row">
+                    <div class="col-md-4">
+                        @*<h2 style="margin-top: 0.5em;color: #346cb0">Log In</h2>*@
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*<h4>Use a local account to log in.</h4>*@
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form__input", @name = "username", id = "username", placeholder = "Username" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            @*<input type="text" name="username" id="username" class="form__input" placeholder="Username">*@
+                        </div>
+                        <div class="row">
+                            <!-- <span class="fa fa-lock"></span> -->
+                            @Html.PasswordFor(m => m.Password, new { @class = "form__input", @name = "password", id = "password", placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            @*<input type="password" name="password" id="password" class="form__input" placeholder="Password">*@
+                        </div>
+                        @*<div class="row">
+                <input type="checkbox" name="remember_me" id="remember_me" class="">
+                <label for="remember_me">Remember Me!</label>
+            </div>*@
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="submit" value="Log In" class="btn btn-outline-primary">
+                            </div>
+
+                        </div>
+                        <div class="row login-footer">
+                            TCP/LEB/3603 | Lebanese Ministry of Agriculture &copy; 2021
+                        </div>
+                        @*<div class="row">
+                <p>Don't have an account? <a href="#">Register Here</a></p>
+            </div>*@
+                    }
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

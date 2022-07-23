@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Contaminants_Monitoring.ViewModels.UsersViewModel>
+@{
+    ViewBag.Title = "Users With Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+<style>
+    .dataTables_length, .dataTables_filter {
+        font-size: 13px !important;
+    }
+
+    table.dataTable thead th, table.dataTable thead td {
+        border-bottom: none !important;
+    }
+</style>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" target="_self">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Administration</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Users List</h3>
+
+<hr />
+<div class="panel panel-primary">
+    @*<div class="panel-heading">
+            <h3 class="box-title">
+                <b>Users with Roles</b>
+            </h3>
+        </div>*@
+    <p>
+        @Html.ActionLink("Add a new user", "Register", "Account")
+    </p>
+
+    <!-- /.box-header -->
+    <div class="panel-body">
+        <table class="table table-hover table-condensed table-responsive table-striped" style="display:table" id="UsersWithRoles">
+            <thead style="background-color: #346cb0 !important;color: white;">
+                <tr>
+                    <td><b>Username</b></td>
+                    <td><b>Email</b></td>
+                    <td><b>Phone Number</b></td>
+                    <td><b>Regional Office</b></td>
+                    <td><b>Roles</b></td>
+                    <td></td>
+                </tr>
+            </thead>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>@user.RegionalOffice</td>
+                    <td>@user.Role</td>
+                    <td>@Html.ActionLink("Reset Password", "ResetPassword", "Account", new { id = user.UserId }, null) </td> 
+                        @*@Html.ActionLink("Delete", "DeleteUser", new { id = user.UserId })*@
+                </tr>
+
+            }
+        </table>
+    </div>
+    <br />
+    <div class="panel-footer">
+        <p class="box-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.Count()</span></p>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+
+        $(function () {
+            $('#UsersWithRoles').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": true
+            });
+        });
+    </script>
+}  

@@ -1,0 +1,220 @@
+﻿@model IEnumerable<Contaminants_Monitoring.ViewModels.CollectionViewModel>
+@{
+    ViewBag.Title = "CollectionIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+
+<link href="~/Content/DataTables/css/dataTables.jqueryui.css" rel="stylesheet" />
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Collection</li>
+    </ol>
+</nav>
+
+<h3 style="padding-top: 20px; color: dimgray;">Samples Collection</h3>
+
+<hr />
+
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>@ViewBag.Message</strong>
+            </div>
+        </div>
+    </div>
+}else if (!String.IsNullOrEmpty(ViewBag.ErrorMessage)) {
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>@ViewBag.ErrorMessage</strong>
+            </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("CollectionIndex", "Generate", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @*@Html.ActionLink("Dispatch","Dispatch","Generate",null,new { @class="btn btn-primary"})*@
+            <button type="submit" value="Dispatch" class="btn btn-success btn-sm">
+                Dispatch
+                &nbsp; <i class="fa fa-arrow-right"></i>
+            </button>
+            @*@Html.ActionLink("Export to file", "ExportExcel", "Generate", null, new { @class = "btn btn-primary" })*@
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table id="collectionsId" class="table table-responsive table-hover" style="white-space:nowrap;overflow-x:scroll !important; display:table;">
+                <thead>
+                    <tr style="background-color: #346cb0;
+color: white;
+white-space: nowrap;">
+                        <th></th>
+                        <th></th>
+                        <th>Identification Code</th>
+                        <th>Commodity</th>
+                        <th>Description</th>
+                        <th>Contaminant Type</th>
+                        <th>Status</th>
+                        <th>Sampling Date</th>
+                        <th>From Date</th>
+                        <th>Due Date</th>
+                        <th>Dispatch Date</th>
+                        <th>Premise Type</th>
+                        <th>Sample Origin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model is null)
+                    {
+                        <tr><td><p>No records</p></td></tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            //var higlighted = "";
+                            //if (item.labSample.Collection_Due_Date < DateTime.Now && item.labSample.Status == "Generated")
+                            //{
+                            //    higlighted = "alertRow";
+                            //}
+                            <tr>
+                                <td>
+
+                                    @if (item.labSample.Status == "Generated")
+                                    {
+                                        <input type="checkbox" name="sampleID" value="@item.labSample.pkLabSampleId" class="custom-checkbox chkCheckBoxId" />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="sampleID" value="@item.labSample.pkLabSampleId" class="custom-checkbox chkCheckBoxId" disabled />
+                                    }
+                                </td>
+                                <td>
+                                    <div style="display: inline-block;width: 50px !important;">
+                                        @if (item.labSample.Status == "Generated")
+                                        {
+                                            <a href="@Url.Action("EditCollection", new { id = item.labSample.pkLabSampleId })" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                <i class="fa fa-pencil" title="edit" style="color: #346cb0;"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <p style="display:none;"></p>
+                                        }
+                                        @*<a href="@Url.Action("ViewCollection", new { id = item.labSample.pkLabSampleId })"><i class="fa fa-info-circle" title="View" style="color: #346cb0;"></i> </a>*@
+
+                                    </div>
+                                </td>
+                                <td>
+                                    @if (item.labSample.Collection_Due_Date < DateTime.Now && item.labSample.Status == "Generated")
+                                    {
+                                        <span class="badge badge-danger" style="padding: 0.5em 2em 0.5em 2em !important;">
+                                            @Html.DisplayFor(modelItem => item.labSample.SampleNb)
+                                            <i class="fa fa-warning" style="padding-left: 1em;"></i>
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.labSample.SampleNb)
+                                    }
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.labSample.Commodity.CommodityName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.labSample.CommodityState.CommodityDescription)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.labSample.ContaminantType.ContaminantName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.labSample.Status)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.labSample.SamplingDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.labSample.Collection_Start_Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.labSample.Collection_Due_Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.labSample.DispatchDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.labSample.PremiseType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.labSample.SampleOrigin.OriginText)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+@*<br/><br /><br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card border-danger" style="color: gray; border-left: 1em solid #dc3545 !important;">
+                <div class="card-body">
+                    Highlighted Rows show samples that passed the collection due date
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<script>
+    $(document).ready(function () {
+        var table = $("#collectionsId").DataTable(
+            {
+                "ordering": false
+            }
+        );
+        var exportedData;
+        table.on('search.dt', function () {
+           // alert('nodes().length : ' + table.rows({ filter: 'applied' }).nodes().length);
+            data = table.rows({ filter: 'applied' }).data().toArray();
+            data9 = JSON.stringify(data);
+           // alert('data9: ' + data9);
+            exportedData = data9;
+            $.post("@Url.Action("PostFilteredData", "Generate")?filteredData=" + data, function (res) {
+               // alert('456465465465');
+                    if (res.Success === "true") {
+
+                    } else {
+                        alert("Error exporting data!");
+                    }
+                });
+
+        });
+
+    });
+    $('#checkBoxAll').click(function () {
+        if ($(this).is(":checked")) {
+            $(".chkCheckBoxId").prop("checked", true)
+        } else {
+            $(".chkCheckBoxId").prop("checked", false)
+        }
+    });
+
+</script>

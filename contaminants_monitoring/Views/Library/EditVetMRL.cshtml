@@ -1,0 +1,94 @@
+﻿@model Contaminants_Monitoring.ViewModels.VetMRLModel
+@{
+    ViewBag.Title = "Edit Vet MRL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Library", "Library", "Home")
+        </li>
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Contaminants", "ContaminantsLibrary", "Home")
+        </li>
+        <li class="breadcrumb-item">
+            @Html.ActionLink("List of MRL Values", "VeterinaryResidues", "Library")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Edit MRL Value for veterinary residue</h3>
+
+<hr />
+
+@using (Html.BeginForm("EditVetMRL", "Library", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.pkVetMRLId)
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group row">
+        <div class="col-md-8">
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    </div>
+    @if (!String.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>@ViewBag.Message</strong>
+                </div>
+            </div>
+        </div>
+    }
+    @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>@ViewBag.ErrorMessage</strong>
+                </div>
+            </div>
+        </div>
+    }
+    <br />
+
+
+    <div class="form-group row">
+        @Html.Label("Veterinary Residue ", new { @class = "control-label col-md-2" })
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.VetResidueName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.Label("Commodity ", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DisplayFor(model => model.commodityName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.Label("Antibiotics Class ", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DisplayFor(model => model.AntibioticsClass, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.Label("MRL Value", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.mrl, new { htmlAttributes = new { id = "concId", @class = "form-control form-control-sm" } })
+        </div>
+        @Html.Label("Unit of Measurement ", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DisplayFor(model => model.mrl_uom, new { @class = "form-control" })
+            @*@Html.DropDownListFor(model => model.selectedUOM, new SelectList(Model.units, "pkUOMId", "unit"), "select", new { @class = "form-control form-control-sm", id = "unitChosenId" })*@
+        </div>
+    </div>
+</div>
+}

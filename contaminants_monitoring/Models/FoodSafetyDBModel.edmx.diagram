@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e0ff578ebf774a2795da379e4fe86b35" Name="Diagram1">
+        <EntityTypeShape EntityType="FoodSafetyDBModel.Caza" Width="1.5" PointX="3" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.CollectionDesign" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.Commodity" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.CommodityState" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.ContaminantType" Width="1.5" PointX="3" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.Country" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.Governorate" Width="1.5" PointX="3" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.IndividualConsumption" Width="1.5" PointX="5.25" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.Laboratory" Width="1.5" PointX="3" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.LabSample" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.Mycotoxin" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.MycotoxinML" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.PackagingType" Width="1.5" PointX="3" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.PesticideResidue" Width="1.5" PointX="3" PointY="36.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.PestResMRL" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.SampleOrigin" Width="1.5" PointX="3" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.SamplingPlan" Width="1.5" PointX="3" PointY="43.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.SamplingReason" Width="1.5" PointX="3" PointY="46.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.SamplingType" Width="1.5" PointX="3" PointY="48.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.SourceType" Width="1.5" PointX="3" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.TestClassification" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.UOM" Width="1.5" PointX="0.75" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.VeterinaryResidue" Width="1.5" PointX="5.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodSafetyDBModel.VetResMRL" Width="1.5" PointX="8" PointY="13.875" IsExpanded="true" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkCaz__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__Commodity__fkCom__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkCom__1C873BEC" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__Mycotoxin__fkCom__73852659" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__PestResMR__fkCom__6EC0713C" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__VetResMRL__fkCom__3AD6B8E2" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkCom__0F624AF8" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkCon__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkOri__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__Individua__fkGov__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkGov__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkLab__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkMyc__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkPac__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkPes__1EA48E88" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkSam__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkSam__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkSam__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__LabSample__fkSou__7BE56230" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.fk_SamplingPlanLabSample" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__Mycotoxin__fkMyc__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__Pesticide__fkADI__02925FBF" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__Pesticide__fkARF__038683F8" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__PestResMR__fkPes__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__VetResMRL__fkUOM__370627FE" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__VetResMRL__fkUOM__38EE7070" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodSafetyDBModel.FK__VetResMRL__fkVet__39E294A9" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

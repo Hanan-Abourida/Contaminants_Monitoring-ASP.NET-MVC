@@ -1,0 +1,459 @@
+﻿@model Contaminants_Monitoring.ViewModels.LabTestViewModel
+@{
+    ViewBag.Title = "AddTest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Inventory", "Inventory", "LabTest")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Laboratory Test Form</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Laboratory Test Form</h3>
+
+<hr />
+
+@using (Html.BeginForm("AddTest", "LabTest", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.labSample.pkLabSampleId)
+        @Html.HiddenFor(model => model.labSample.SampleNb)
+        <div class="form-group row">
+            <div class="col-md-8">
+                <input type="submit" value="Save" class="btn btn-success" />
+                @*@Html.ActionLink("Tests list For this Sample", "TestsList", "LabTest", routeValues: null, htmlAttributes: new { @class = "btn btn-outline-success" })*@
+            </div>
+            <div class="col-md-2">
+                <div class="custom-control custom-switch">
+                    @Html.CheckBoxFor(m => m.caseClosed, new { @class = "custom-control-input", id = "caseCloseSwitch" })
+                    @*<input type="checkbox" class="custom-control-input" id="ackSwitch" onchange="">*@
+                    <label class="custom-control-label" for="caseCloseSwitch">Close case for sample</label>
+                </div>
+            </div>
+            @*@Html.ActionLink("Inventory list", "Inventory", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })*@
+        </div>
+        @if (!String.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-info alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>@ViewBag.Message</strong>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>@ViewBag.ErrorMessage</strong>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        <div class="form-group row font-weight-bold">
+            @Html.Label("Sample Identity Code", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DisplayTextFor(model => model.labSample.SampleNb)
+        </div>
+        <div class="form-group row">
+            @Html.Label("Commodity", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DisplayTextFor(model => model.labSample.Commodity.CommodityName)
+            </div>
+            @Html.Label("State Description", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DisplayTextFor(model => model.labSample.CommodityState.CommodityDescription)
+            </div>
+
+        </div>
+        <div class="form-group row">
+            @Html.Label("Sampling Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DisplayTextFor(m => m.labSample.SamplingDate)
+            </div>
+            @Html.Label("Sampling Time", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DisplayTextFor(m => m.labSample.SamplingTime)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.Label("Contaminant Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DisplayTextFor(model => model.labSample.ContaminantType.ContaminantName)
+            </div>
+            @Html.Label("Sampling Reason", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DisplayTextFor(m => m.labSample.SamplingReason.SamplingReasonText)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-10">
+
+
+                @if (Model.labSample.ViolationType == "C")
+                {
+                    <div class="alert alert-success" role="alert">
+                        @Html.Label("Violation Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.DisplayTextFor(model => model.labSample.ViolationType)
+                    </div>
+                }
+                else if (Model.labSample.ViolationType == "V")
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @Html.Label("Violation Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.DisplayTextFor(model => model.labSample.ViolationType)
+                    </div>
+                }
+
+            </div>
+        </div>
+
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Sample Information</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Analysis Test Result</a>
+                <a class="nav-item nav-link" id="nav-note-tab" data-toggle="tab" href="#nav-note" role="tab" aria-controls="nav-note" aria-selected="false">Add Lab Notes</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <br /><br />
+                <div class="form-group row">
+                    @Html.Label("Collected Quantity", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(model => model.labSample.CollectedQuantity)
+                    </div>
+                    @Html.Label("Sample Quantity", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(model => model.labSample.SampleQuantity)
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.Label("Receiving Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(model => model.labSample.ReceivingDate)
+                    </div>
+                    @Html.Label("Receiving Time", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(model => model.labSample.ReceivingTime)
+                    </div>
+                </div>
+              
+                @*<div class="form-group row">
+                @Html.Label("Lab Notes", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.labSample.Lab_Rejection_Comment, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>*@
+                <hr />
+                @*<div class="form-group row">
+                @Html.Label("Sampling Reason: ", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DisplayTextFor(m => m.labSample.SamplingReason.SamplingReasonText)
+                </div>
+            </div>*@
+
+                <div class="form-group row">
+                    @Html.Label("Sampling Type: ", new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.SamplingType.SamplingTypeText)
+                    </div>
+                    @Html.Label("Premise Type: ", new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.PremiseType)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("Premise Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.PremiseName)
+                    </div>
+                    @Html.Label("Premise Address", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.PremiseAddress)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("Contact Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(model => model.labSample.ContactName)
+                    </div>
+                    @Html.Label("Contact Phone", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(model => model.labSample.ContactPhoneNumber)
+                    </div>
+                </div>
+                <br />
+                <p>Source</p>
+                <div class="form-group row">
+                    @Html.Label("Source Type", new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.SourceType.SourceTypeText)
+                    </div>
+                    @Html.Label("Source Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.SourceName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("Source Contact Name", new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.SourceContactName)
+                    </div>
+                    @Html.Label("Source Contact Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.SourceContactNumber)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("Source Address", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayTextFor(m => m.labSample.SourceAddress)
+                    </div>
+                </div>
+
+                <hr />
+                <div class="form-group row">
+                    @Html.Label("Brand Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.BrandName)
+                    </div>
+                    @Html.Label("Manufacturer", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.Manufacturer)
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    @Html.Label("Distributer", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.Distributor)
+                    </div>
+                    @Html.Label("Importer", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.Importer)
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    @Html.Label("Sample Origin", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.SampleOrigin.OriginText)
+                    </div>
+                    @Html.Label("Country of Origin", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.Country.CountryName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("Packaging Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.PackagingType.PackagingTypeText)
+                    </div>
+                    @Html.Label("Pack Quantity Size", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.PackQuantitySize)
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.Label("Batch Lot Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.BatchLotNumber)
+                    </div>
+                    @Html.Label("Shelf Life", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.ShelfLife)
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    @Html.Label("Storage Conditions", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.StorageConditions)
+                    </div>
+                    @Html.Label("Collector's Notes", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DisplayTextFor(m => m.labSample.Notes_Collector)
+                    </div>
+                </div>
+
+                @*<div class="form-group row">
+                @Html.Label("Contact Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DisplayTextFor(model => model.labSample.ContactName)
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.Label("Contact Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DisplayTextFor(model => model.labSample.ContactPhoneNumber)
+                </div>
+            </div>*@
+            </div>
+
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <br /><br />
+                @if (Model.labSample.ContaminantType.ContaminantCode.Equals("R"))
+                {
+                    <div class="form-group row">
+                        @Html.Label("Specify Pesticide Residue ", new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.selectedResID, new SelectList(Model.pesticideResidues, "pkPesticideResidueId", "PestResName"), "select", new { @class = "form-control form-control-sm", id = "residueChosenId" })
+                        </div>
+                    </div>
+                }
+                else if (Model.labSample.ContaminantType.ContaminantCode.Equals("AF"))
+                {
+                    <div class="form-group row">
+                        @Html.Label("Specify Mycotoxin: ", new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.selectedMycotoxinId, new SelectList(Model.mycotoxins, "pkMycotoxinId", "MycotoxinName"), "select", new { @class = "form-control form-control-sm", id = "mycotoxinChosenId" })
+                        </div>
+                    </div>
+                }
+                <div class="form-group row">
+                    @Html.Label("Analysis Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.labSample.AnalysisDate, new { htmlAttributes = new { id = "analysisDateId", @class = "form-control form-control-sm datepicker" } })
+                        @Html.ValidationMessageFor(model => model.labSample.AnalysisDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("Analysis Portion", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.labSample.AnalysisPortion, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    </div>
+                    @Html.Label("Analysis Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.labSample.AnalysisType, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        @Html.Label("Concentration", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="form-check-inline">
+                            @Html.RadioButtonFor(m => m.concentrationStatus, "D", new { @class = "form-check-input", id = "RadioDefault1" })
+                            <label class="form-check-label" for="RadioDefault1"> Detected</label>
+                        </div>
+                        <div class="form-check-inline">
+                            @Html.RadioButtonFor(m => m.concentrationStatus, "ND", new { @class = "form-check-input", name = "flexRadioDefault", id = "RadioDefault2" })
+                            <label class="form-check-label" for="RadioDefault2"> Non detected</label>
+                        </div>
+                        <div class="form-check-inline">
+                            @Html.RadioButtonFor(m => m.concentrationStatus, "NQ", new { @class = "form-check-input", name = "flexRadioDefault", id = "RadioDefault3" })
+                            <label class="form-check-label" for="RadioDefault2"> Non quantified</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("Final Concentration", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.labSample.ConFinal, new { htmlAttributes = new { id = "concId", @class = "form-control form-control-sm" } })
+                    </div>
+                    @Html.Label("Unit of Measurement ", new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.selectedUOM, new SelectList(Model.units, "pkUOMId", "unit"), "select", new { @class = "form-control form-control-sm", id = "unitChosenId" })
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    @Html.Label("LOD", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.labSample.LOD, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    </div>
+                    @Html.Label("LOQ", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.labSample.LOQ, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.Label("Uncertainty", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.labSample.Uncertainty, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    </div>
+                    @Html.Label("Uncertainty Percent", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.labSample.UncertaintyPercent, new { htmlAttributes = new { @class = "form-control form-control-sm" } }) %
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.Label("Extraction Method", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.labSample.ExtractionMethod, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    </div>
+                    @Html.Label("Determinative Method", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.labSample.DeterminativeMethod, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="nav-note" role="tabpanel" aria-labelledby="nav-note-tab">
+                <br/><br/>
+                <div class="form-group row">
+                    @Html.Label("Lab Notes", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-7">
+                        <style>
+                            textarea {
+                                max-width: 100%;
+                                border: 1px solid lightgray;
+                            }
+                        </style>
+                        @Html.TextAreaFor(model => model.labSample.Lab_Rejection_Comment, 10, 300, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#analysisDateId").datepicker(
+                {
+                    showTodayButton: true,
+                    dateFormat: 'dd-M-yy',
+                    showClose: true,
+                    showClear: true,
+                    toolbarPlacement: 'top',
+                    stepping: 15,
+                });
+
+            $("#concId").prop('disabled', true);
+            $("#unitChosenId").prop('disabled', true);
+            $('input[type=radio]').click(function () {
+                if ($(this).val() != "D") {
+                    $("#concId").prop("disabled", true);
+                    $("#unitChosenId").prop('disabled', true);
+                } else {
+                    $("#concId").prop("disabled", false);
+                    $("#unitChosenId").prop('disabled', false);
+                }
+
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,322 @@
+﻿@model IEnumerable<Contaminants_Monitoring.Models.LabSample>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SampleNb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LabSampleNb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfficerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfficerPhoneNb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SamplingPlan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SampleCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PremiseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PremiseType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PremiseAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactPhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SamplingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SamplingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BrandName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Distributor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Importer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PackQuantitySize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BatchLotNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShelfLife)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StorageConditions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SampleQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceivingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceivingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnalysisDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnalysisPortion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnalysisType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fkConUOM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LOD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LOQ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uncertainty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UncertaintyPercent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExtractionMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeterminativeMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ViolationType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Caza.CazaCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Commodity.CommodityCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommodityState.CommodityDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContaminantType.ContaminantName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.CountryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Governorate.GovernorateCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Laboratory.LaboratoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mycotoxin.MycotoxinName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PackagingType.PackagingTypeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PesticideResidue.PestResName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SamplingReason.SamplingReasonCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SamplingType.SamplingTypeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SampleOrigin.OriginCode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleNb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LabSampleNb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfficerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfficerPhoneNb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SamplingPlan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PremiseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PremiseType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PremiseAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactPhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SamplingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SamplingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BrandName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Manufacturer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Distributor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Importer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PackQuantitySize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BatchLotNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShelfLife)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StorageConditions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceivingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceivingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnalysisDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnalysisPortion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnalysisType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fkConUOM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LOD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LOQ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uncertainty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UncertaintyPercent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExtractionMethod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeterminativeMethod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViolationType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Caza.CazaCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commodity.CommodityCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommodityState.CommodityDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContaminantType.ContaminantName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country.CountryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Governorate.GovernorateCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Laboratory.LaboratoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mycotoxin.MycotoxinName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PackagingType.PackagingTypeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PesticideResidue.PestResName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SamplingReason.SamplingReasonCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SamplingType.SamplingTypeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleOrigin.OriginCode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pkLabSampleId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pkLabSampleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pkLabSampleId })
+        </td>
+    </tr>
+}
+
+</table>

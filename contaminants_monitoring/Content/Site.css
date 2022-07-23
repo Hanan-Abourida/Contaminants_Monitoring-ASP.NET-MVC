@@ -1,0 +1,225 @@
+﻿
+@font-face {
+    font-family: 'Mukta-Light';
+    src: url('../fonts/Mukta-Light.ttf') format('truetype');
+}
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    /*font-family: -apple-system,BlinkMacSystemFont,Fira Sans,Helvetica Neue,Apple Color Emoji,sans-serif !important;*/
+    font-family: 'Mukta-Light',sans-serif !important;
+}
+body, html{
+    height:100%;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+/*    background-color: #f6f7f9;*/
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#sidebar a, #sidebar a:hover, #sidebar a:focus {
+    text-decoration:none !important;
+    transition: all 0.3s !important;
+}
+
+#sidebar {
+    background-color: #f6f7f9 !important;
+    color: #363642 !important;
+    border-right: 1px solid rgba(20,20,31,.05) !important;
+    padding: 0 !important;
+    line-height: 1.25rem !important;
+    box-shadow: 0px 4px 4px 2px lightgrey;
+}
+#sidebar ul.components{
+    /*padding:15px 0;*/
+    /*border-bottom: 1px solid #47748b;*/
+
+}
+
+    #sidebar ul p {
+        color: #363642 !important;
+        padding: 10px;
+    }
+
+    #sidebar ul li a {
+        padding: 5px;
+        font-size: 0.787rem;
+        display: block;
+        padding-left: 10% !important;
+        color: #808080 !important;
+    }
+    #sidebar ul.components li a:hover {
+        color: #346cb0 !important;
+        /*font-weight: bolder !important;*/
+    }
+    #sidebar ul.components i:hover {
+        color: #346cb0 !important;
+    }
+
+    #sidebar ul li.active > a, a[aria-expanded="true"] {
+        color: #346cb0 !important;
+        /*background-color: white !important;*/
+    }
+    #sidebar ul li li {
+        padding-left: 18% !important;
+    }
+ul ul a {
+    font-size: 0.787rem !important;
+    padding-left: 15% !important;
+}
+a[data-toggle="collapse"] {
+    position: relative;
+}
+.dropdown-toggle::after{
+    /*display:block;
+    position:absolute;
+    top:50%;
+    right:10%;
+    transform:translateY(-50%);*/
+    display: none !important;
+}
+
+ul.sidebar-submenu li a {
+    font-size: .875rem !important;
+    line-height: 1.25rem !important;
+}
+
+.stacked-menu .menu-link:hover .menu-icon {
+    color: #888c9b;
+}
+
+/*.btn-primary{
+    background-color: crimson !important;
+    border-color: crimson !important;
+}*/
+
+.tablePill.nav-link.active {
+    box-shadow: 0px 0px 12px -4px lightgray !important;
+    color: crimson !important;
+    border-bottom: 2px solid crimson !important;
+}
+
+.tablePill {
+    color: lightgrey !important;
+    border-color: lightgrey !important;
+    border-radius: 0 !important;
+    font-weight: bold !important;
+    background-color: transparent !important;
+}
+
+.statTable tbody tr:hover, #detailedFindings tr:hover {
+    background-color: #346cb0 !important;
+    color: white !important;
+}
+
+.statTable {
+    white-space: nowrap !important;
+    color: #4A4A46 !important;
+    border-collapse: collapse !important;
+    display: table !important;
+}
+
+    .statTable thead tr {
+        background-color: #c1c1ff !important;
+        color: #4A4A46 !important;
+    }
+.separator-row {
+    background-color: #7A7A7A !important;
+    /*background-color: #2265A7 !important;*/
+    color: white !important;
+}
+.table th, .table td {
+    padding: 0.6rem !important;
+}
+#sidebar ul li li:hover {
+    /*box-shadow: -1px 1px 0px 1px lightgray;
+    color: white !important;*/
+    transition: 0.4s;
+}
+
+.searchLabel {
+    font-size: 0.85em !important;
+}
+
+.findingsDiv div.card {
+    border-radius: 0 !important;
+    /*border-left: 5px solid #346cb0 !important;*/
+}
+
+    .findingsDiv div.card .card-body {
+        padding: 0.6rem !important;
+    }
+
+#mainTableId tbody tr:hover {
+    background-color: #346cb0 !important;
+    color: white !important;
+}
+
+.violatedRowClass {
+    background-color: #FF716C !important;
+    color: white;
+}
+
+.keyDiv {
+    padding: 0.6em;
+    width: 100% !important;
+    text-align: left;
+    color: white;
+    margin: 0.5em;
+    font-size: medium;
+    margin-left: 0 !important;
+}
+
+.violationLabel {
+    padding: 0.5rem;
+    width: 70%;
+    color: white;
+}
+
+.findingsIcon {
+    color: crimson !important;
+    font-size: 15px !important;
+    margin-right: 0.3rem;
+}
+
+div#detailedFindingsDivId p {
+    font-weight: bold !important;
+}
+.styledTable {
+    font-size: 15px;
+}
+.styledTable thead tr {
+    background-color: lightgray;
+    color: #111;
+}
+
+.styledTable tbody tr:hover{
+    background-color: red;
+    color: white;
+}
+
+.breadcrumb{
+    background-color: white !important;
+}
+
+.alertRow {
+    background-color: #FF8680 !important;
+    color: brown;
+}

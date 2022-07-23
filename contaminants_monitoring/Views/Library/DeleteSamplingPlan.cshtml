@@ -1,0 +1,57 @@
+﻿@model Contaminants_Monitoring.Models.SamplingPlan
+
+@{
+    ViewBag.Title = "DeleteSamplingPlan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" target="_self">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Library</li>
+        <li class="breadcrumb-item active" aria-current="page">Sampling Plans</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Confirm Delete</h3>
+
+<hr />
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Sampling Plan Code")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SamplingPlanCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Description")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SamplingPlanDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Short Code")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortCode)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-outline-danger" /> |
+            @Html.ActionLink("Back to List", "SamplingPlansList")
+        </div>
+    }
+</div>

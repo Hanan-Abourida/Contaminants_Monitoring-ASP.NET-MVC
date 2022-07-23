@@ -1,0 +1,166 @@
+﻿@model Contaminants_Monitoring.ViewModels.LabInventoryViewModel
+@{
+    ViewBag.Title = "Inventory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/Content/DataTables/css/dataTables.jqueryui.css" rel="stylesheet" />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Inventory</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Laboratory Inventory</h3>
+
+<hr />
+@using (Html.BeginForm(""))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group row">
+                @Html.Label("List showing", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.status, "Dispatched", new { @class = "form-check-input", id = "RadioDefault1", @checked = true })
+                        <label class="form-check-label" for="RadioDefault1"> Dispatched</label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.status, "SentForTesting", new { @class = "form-check-input", id = "RadioDefault2" })
+                        <label class="form-check-label" for="RadioDefault2"> Sent For Testing</label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.status, "Rejected", new { @class = "form-check-input", name = "flexRadioDefault", id = "RadioDefault4" })
+                        <label class="form-check-label" for="RadioDefault4"> Rejected</label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.status, "All", new { @class = "form-check-input", name = "flexRadioDefault", id = "RadioDefault3" })
+                        <label class="form-check-label" for="RadioDefault3"> All</label>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <button type="submit" value="Load" class="btn btn-sm btn-success">
+                        <i class="fa fa-refresh"></i>
+                        Refresh
+                    </button>
+
+                    <a class="btn btn-sm btn-outline-success" href="~/Printouts/InventoryReport.aspx" target="_blank" 
+                       onclick="window.open('../Printouts/InventoryReport.aspx','List_Lab','resizable,height=600,width=1000'); return false;">
+                        <i class="fa fa-print" style=""></i>
+                        Export List
+                    </a>
+                </div>
+            </div>
+
+         </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table id="samplesStatusId" class="table table-responsive table-hover" style="display:table;">
+                <thead>
+                    <tr style="background-color: #346cb0;
+color: white;
+white-space: nowrap;">
+                        <th>Actions</th>
+                        <th>Identity Code</th>
+                        <th>Sample Lab Number</th>
+                        <th>Commodity</th>
+                        <th>Commodity Description</th>
+                        <th>Contaminant</th>
+                        <th>Sampling Date</th>
+                        <th>Received Date</th>
+                        <th>Sample's Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model is null)
+                    {
+                        <tr><td><p>No records</p></td></tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.labSamples)
+                        {
+                <tr>
+                    <td>
+                        @*@Html.ActionLink("Details", "Details", new { id = item.pkLabSampleId })|*@
+                        @Html.ActionLink("Edit", "EditSampleByLab", new { id = item.pkLabSampleId })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SampleNb)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LabSampleNb)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Commodity.CommodityName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommodityState.CommodityDescription)
+                    </td>
+                    <td>
+                        @if (item.ContaminantType.ContaminantCode == "R")
+                        {
+                            @Html.DisplayFor(modelItem => item.PesticideResidue.PestResName)
+                        }
+                        else if (item.ContaminantType.ContaminantCode == "AF")
+                        {
+                            @Html.DisplayFor(modelItem => item.Mycotoxin.MycotoxinName)
+                        }
+
+                    </td>
+                    <td>
+                        @if (item.SamplingDate.HasValue)
+                        {
+                            @Html.DisplayFor(modelItem => item.SamplingDate)
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceivingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @if (!String.IsNullOrEmpty(item.Status) && (item.Status == "Accepted For Testing" || item.Status == "Sent To Testing"))
+                        {
+                            @Html.ActionLink("Add Analysis Test", "AddTest", new { id = item.pkLabSampleId })
+
+
+                        }
+                        @*@if (!String.IsNullOrEmpty(item.Status) && item.Status == "Accepted For Testing")
+        {
+
+        }
+                        @Html.ActionLink("Tests List", "TestsList", new { id = item.pkLabSampleId })*@
+
+
+                    </td>
+                </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+
+<script>
+    //$(document).ready(function () {
+    //    $("#samplesStatusId").DataTable(
+    //        {
+    //            "scrollX": true
+    //        }
+    //    );
+    //});
+    $(document).ready(function () {
+        $("#samplesStatusId").DataTable();
+    });
+</script>

@@ -1,0 +1,69 @@
+﻿@model Contaminants_Monitoring.ViewModels.ContaminantHistoryVM
+@{
+    ViewBag.Title = "Contaminants History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">History</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Contaminant History</h3>
+<hr />
+<a class="PrintLink" href="~/Printouts/ContaminantsHistory.aspx" target="_blank" onclick="window.open('../Printouts/ContaminantsHistory.aspx','ContaminantsHistory_Report','resizable,height=600,width=1000'); return false;">
+    <i class="fa fa-print" style=""></i>
+    Print
+</a>
+@*@Html.ActionLink("Print", "PrintContaminantHistory", "Output")*@
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-responsive table-striped table-hover display" id="mainTableId" style="display:table">
+            <thead>
+                <tr style="background-color: #346cb0;
+color: white;
+white-space: nowrap;">
+                    <th>Contaminant</th>
+                    <th>
+                        Year
+                    </th>
+                    <th>
+                        Number Of Commodities/ Products
+                    </th>
+                    <th width="100px"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var commGroup in Model.contaminantHistoryItems.GroupBy(i => i.contaminant))
+                {
+
+                    <tr>
+                        <th colspan="4">
+                            @commGroup.Key
+                        </th>
+                    </tr>
+                    foreach (var item in commGroup)
+                    {
+                        <tr>
+                            <td width="100px"></td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.year)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nbOfProducts)
+                            </td>
+                            <td></td>
+                        </tr>
+                    }
+
+
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+

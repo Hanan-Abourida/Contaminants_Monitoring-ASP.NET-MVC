@@ -1,0 +1,125 @@
+﻿@model Contaminants_Monitoring.ViewModels.NotificationViewModel
+@{
+    Page.Title = "Email Notification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/umd/popper.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/Content/DataTables/css/dataTables.jqueryui.css" rel="stylesheet" />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Generated Samples", "AllSamples", "Home")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Send Notification</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Collector's Notification</h3>
+
+<hr />
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>@ViewBag.Message</strong>
+            </div>
+        </div>
+    </div>
+}
+@if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>@ViewBag.ErrorMessage</strong>
+            </div>
+        </div>
+    </div>
+}
+<div>
+
+    @using (Html.BeginForm("SendEmailToCollector", "Generate", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                @*<div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Send Notification
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <button type="submit" value="send" class="btn btn-danger dropdown-item">
+                            Email Only
+                        </button>
+                        @Html.ActionLink("Email Only", "SendEmailToCollector", "Generate", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                        <a class="dropdown-item" href="#">SMS Only</a>
+                        <a class="dropdown-item" href="#">Email and SMS</a>
+                    </div>
+                </div>*@
+                <button type="submit" value="send" class="btn btn-success">
+                    <i class="fa fa-bell"></i>
+                    &nbsp; Send
+                </button>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-responsive" id="collectorsTableId" style="display:table">
+                    <thead>
+                        <tr tyle="background-color: #346cb0;
+color: white;
+white-space: nowrap;">
+                            <th></th>
+                            <th>Collector Name</th>
+                            <th>Regional Office</th>
+                            <th>Contact Number</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.allCollectors)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="collectorInfoID" value="@item.Id" class="custom-checkbox chkCheckBoxId" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Center)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        $("#collectorsTableId").DataTable();
+
+    });
+    $('#checkBoxAll').click(function () {
+        if ($(this).is(":checked")) {
+            $(".chkCheckBoxId").prop("checked", true)
+        } else {
+            $(".chkCheckBoxId").prop("checked", false)
+        }
+    });
+
+</script>

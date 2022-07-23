@@ -1,0 +1,174 @@
+﻿@model Contaminants_Monitoring.ViewModels.CollectorSelectorViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<h3 style="padding-top: 20px; color: dimgray;">Collection Design</h3>
+
+<hr />
+
+@using (Html.BeginForm("Edit", "Generate", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    if (!String.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>@ViewBag.Message</strong>
+                </div>
+            </div>
+        </div>
+    }
+    if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>@ViewBag.ErrorMessage</strong>
+                </div>
+            </div>
+        </div>
+    }
+    <br />
+    <div class="form-horizontal">
+        Collector
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            @Html.Label("Specify Collector: ", new { @class = "control-label col-md-4" })
+            <div class="col-md-5">
+
+                @Html.DropDownListFor(m => m.selectedCollectorId, new SelectList(Model.collectors, "Id", "UserName"), "select", new { @class = "form-control", id = "CollectorChosenId" })
+            </div>
+        </div>
+        <div class="editablePane">
+            <table class="table-responsive">
+                <tr>
+                    <td>Full Name: </td>
+
+                    <td>@Html.TextBox("UserName", "", new { @class = "myEditable", id = "fullNameTextId", disabled = "disabled" })</td>
+                </tr>
+                <tr>
+                    <td>Email: </td>
+                    <td>@Html.TextBox("Email", "", new { @class = "myEditable", id = "emailTextId", disabled = "disabled" })</td>
+                </tr>
+                <tr>
+                    <td>Phone number: </td>
+                    <td>@Html.TextBox("PhoneNumber", "", new { @class = "myEditable", id = "phoneNbTextId", disabled = "disabled" })</td>
+                </tr>
+                <tr>
+                    <td>Regional office: </td>
+                    <td>@Html.TextBox("Center", "", new { @class = "myEditable", id = "centerTextId", disabled = "disabled" })</td>
+                </tr>
+            </table>
+
+            @*@if (Model.selectedApplicationUser != null)
+                {
+                    @Html.Label("Phone Number: ", new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(m => m.selectedApplicationUser.PhoneNumber, new { @class = "myEditable", disabled = "disabled", id = "phoneNbId" })
+                }*@
+
+        </div>
+        <hr />
+        <div class="form-group row">
+            @Html.Label("Specify Laboratory: ", new { @class = "control-label col-md-4" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(m => m.selectedLabId, new SelectList(Model.Laboratories, "pkLaboratoryId", "LaboratoryName"), "select", new { @class = "form-control", id = "labsChosenId" })
+                @Html.HiddenFor(m => m.labSampleId)
+            </div>
+        </div>
+        <div class="editablePane">
+            <table class="table-responsive">
+                <tr>
+                    <td>Laboratory: </td>
+                    <td>@Html.TextBox("labName", "", new { @class = "myEditable", id = "labNameTextId", disabled = "disabled" })</td>
+                </tr>
+                <tr>
+                    <td>Code: </td>
+                    <td>@Html.TextBox("Code", "", new { @class = "myEditable", id = "codeTextId", disabled = "disabled" })</td>
+                </tr>
+                <tr>
+                    <td>Email: </td>
+                    <td>@Html.TextBox("Email", "", new { @class = "myEditable", id = "labEmailTextId", disabled = "disabled" })</td>
+                </tr>
+                <tr>
+                    <td>Phone number: </td>
+                    <td>@Html.TextBox("PhoneNumber", "", new { @class = "myEditable", id = "labPhoneNbTextId", disabled = "disabled" })</td>
+                </tr>
+                <tr>
+                    <td>Mobile: </td>
+                    <td>@Html.TextBox("Mobile", "", new { @class = "myEditable", id = "labMobileTextId", disabled = "disabled" })</td>
+                </tr>
+                <tr>
+                    <td>Address: </td>
+                    <td>@Html.TextBox("Address", "", new { @class = "myEditable", id = "labAddressTextId", disabled = "disabled" })</td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+ $(function(){
+
+     $("#CollectorChosenId").change(function() {
+            var t = $(this).val();
+            if (t !== "") {
+                $.post("@Url.Action("DisplayCollectorData", "Generate")?val=" + t, function(res) {
+                    if (res.Success === "true") {
+
+                      //set the value
+
+                        $("#fullNameTextId").prop('disabled', true).val(res.Data.UserName);
+                        $("#emailTextId").prop('disabled', true).val(res.Data.Email);
+                        $("#phoneNbTextId").prop('disabled', true).val(res.Data.PhoneNumber);
+                        $("#centerTextId").prop('disabled', true).val(res.Data.Center);
+
+                    } else {
+                        alert("Error getting data!");
+                    }
+                });
+            } else {
+                //Let's clear the values and disable :)
+                //$("#fullNameTextId").val('').prop('disabled', true);
+                //$("#emailTextId").val('').prop('disabled', true);
+                //$("#phoneNbTextId").val('').prop('disabled', true);
+                //$("#centerTextId").val('').prop('disabled', true);
+                $("input.editableItems").val('').prop('disabled', true);
+            }
+
+     });
+     $("#labsChosenId").change(function () {
+            var t = $(this).val();
+         if (t !== "") {
+                $.post("@Url.Action("DisplayLabData", "Generate")?val=" + t, function(res) {
+                    if (res.Success === "true") {
+                        $("#labNameTextId").prop('disabled', true).val(res.Data.LabName);
+                        $("#codeTextId").prop('disabled', true).val(res.Data.Code);
+                        $("#labPhoneNbTextId").prop('disabled', true).val(res.Data.Phone);
+                        $("#labMobileTextId").prop('disabled', true).val(res.Data.Email);
+                        $("#labEmailTextId").prop('disabled', true).val(res.Data.Address);
+                        $("#labAddressTextId").prop('disabled', true).val(res.Data.Mobile);
+
+                    } else {
+                        alert("Error getting data!");
+                    }
+                });
+            } else {
+                $("input.editableItems").val('').prop('disabled', true);
+            }
+        });
+ });
+
+</script>
+
+

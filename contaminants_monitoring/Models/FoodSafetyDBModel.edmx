@@ -1,0 +1,2364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FoodSafetyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Caza">
+          <Key>
+            <PropertyRef Name="pkCazaId" />
+          </Key>
+          <Property Name="pkCazaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CazaCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CazaName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CollectionDesign">
+          <Key>
+            <PropertyRef Name="pkCollectionDesignId" />
+          </Key>
+          <Property Name="pkCollectionDesignId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkLabSampleId" Type="int" />
+          <Property Name="fkDesignerId" Type="nvarchar" MaxLength="128" />
+          <Property Name="GeneratedDate" Type="datetime" />
+          <Property Name="fkCollectorId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Commodity">
+          <Key>
+            <PropertyRef Name="pkCommodityId" />
+          </Key>
+          <Property Name="pkCommodityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommodityCode" Type="varchar" MaxLength="50" />
+          <Property Name="CommodityName" Type="nvarchar" MaxLength="50" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClassCode" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="CommodityState">
+          <Key>
+            <PropertyRef Name="pkCommodityStateId" />
+          </Key>
+          <Property Name="pkCommodityStateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkCommodityId" Type="int" Nullable="false" />
+          <Property Name="CommodityDescription" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContaminantType">
+          <Key>
+            <PropertyRef Name="pkContaminantTypeId" />
+          </Key>
+          <Property Name="pkContaminantTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContaminantName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContaminantCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="pkCountryId" />
+          </Key>
+          <Property Name="pkCountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Governorate">
+          <Key>
+            <PropertyRef Name="pkGovernorateId" />
+          </Key>
+          <Property Name="pkGovernorateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GovernorateCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="GovernorateName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="IndividualConsumption">
+          <Key>
+            <PropertyRef Name="pkIndividualConsumptionId" />
+          </Key>
+          <Property Name="pkIndividualConsumptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IndividualNumber" Type="int" />
+          <Property Name="fkGovernorateId" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="Age" Type="int" />
+          <Property Name="DC" Type="float" />
+          <Property Name="DM" Type="float" />
+          <Property Name="DY1" Type="float" />
+          <Property Name="DY2" Type="float" />
+          <Property Name="FD4" Type="float" />
+          <Property Name="FO1" Type="float" />
+          <Property Name="FO13" Type="float" />
+          <Property Name="FO14" Type="float" />
+          <Property Name="FO18" Type="float" />
+          <Property Name="FO4" Type="float" />
+          <Property Name="FO5" Type="float" />
+          <Property Name="FO9" Type="float" />
+          <Property Name="GR1" Type="float" />
+          <Property Name="MM001" Type="float" />
+          <Property Name="MP" Type="float" />
+          <Property Name="VP001" Type="float" />
+          <Property Name="VP3" Type="float" />
+          <Property Name="VR001" Type="float" />
+          <Property Name="VR1" Type="float" />
+          <Property Name="VR24" Type="float" />
+          <Property Name="VR29" Type="float" />
+        </EntityType>
+        <EntityType Name="Laboratory">
+          <Key>
+            <PropertyRef Name="pkLaboratoryId" />
+          </Key>
+          <Property Name="pkLaboratoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LaboratoryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LaboratoryCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="LabPhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="LabEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="LabAddress" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="LabSample">
+          <Key>
+            <PropertyRef Name="pkLabSampleId" />
+          </Key>
+          <Property Name="pkLabSampleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SampleNb" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LabSampleNb" Type="nvarchar" MaxLength="50" />
+          <Property Name="OfficerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OfficerPhoneNb" Type="nvarchar" MaxLength="50" />
+          <Property Name="fkGovernorateId" Type="int" />
+          <Property Name="fkCazaId" Type="int" />
+          <Property Name="SamplingPlan" Type="int" />
+          <Property Name="SampleCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="fkCommodityStateId" Type="int" />
+          <Property Name="fkSamplingReasonId" Type="int" />
+          <Property Name="fkSamplingTypeId" Type="int" />
+          <Property Name="PremiseName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PremiseType" Type="nvarchar" MaxLength="50" />
+          <Property Name="PremiseAddress" Type="nvarchar(max)" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactPhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="SamplingDate" Type="date" />
+          <Property Name="SamplingTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manufacturer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Distributor" Type="nvarchar" MaxLength="50" />
+          <Property Name="Importer" Type="nvarchar" MaxLength="50" />
+          <Property Name="fkSampleOriginId" Type="int" />
+          <Property Name="fkOriginCountryId" Type="int" />
+          <Property Name="fkPackagingTypeId" Type="int" />
+          <Property Name="PackQuantitySize" Type="nvarchar" MaxLength="50" />
+          <Property Name="BatchLotNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShelfLife" Type="nvarchar" MaxLength="50" />
+          <Property Name="StorageConditions" Type="nvarchar(max)" />
+          <Property Name="fkLaboratoryId" Type="int" />
+          <Property Name="SampleQuantity" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReceivingDate" Type="datetime" />
+          <Property Name="ReceivingTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="AnalysisDate" Type="datetime" />
+          <Property Name="fkContaminantTypeId" Type="int" />
+          <Property Name="fkPesticideResidueId" Type="int" />
+          <Property Name="fkMycotoxinId" Type="int" />
+          <Property Name="AnalysisPortion" Type="nvarchar" MaxLength="50" />
+          <Property Name="AnalysisType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ConFinal" Type="nvarchar" MaxLength="50" />
+          <Property Name="fkConUOM" Type="int" />
+          <Property Name="LOD" Type="float" />
+          <Property Name="LOQ" Type="float" />
+          <Property Name="Uncertainty" Type="float" />
+          <Property Name="UncertaintyPercent" Type="float" />
+          <Property Name="ExtractionMethod" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeterminativeMethod" Type="nvarchar" MaxLength="50" />
+          <Property Name="ComplianceResult" Type="char" MaxLength="1" />
+          <Property Name="fkCommodityId" Type="int" />
+          <Property Name="DispatchDate" Type="datetime" />
+          <Property Name="CloseCaseDate" Type="datetime" />
+          <Property Name="Notes_Designer" Type="nvarchar(max)" />
+          <Property Name="Notes_Collector" Type="nvarchar(max)" />
+          <Property Name="Lab_Rejection_Comment" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Collection_Due_Date" Type="datetime" />
+          <Property Name="Collection_Start_Date" Type="datetime" />
+          <Property Name="fkSourceTypeId" Type="int" />
+          <Property Name="SourceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SourceAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="SourceContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SourceContactNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CollectedQuantity" Type="nvarchar" MaxLength="50" />
+          <Property Name="ViolationType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Mycotoxin">
+          <Key>
+            <PropertyRef Name="pkMycotoxinId" />
+          </Key>
+          <Property Name="pkMycotoxinId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MycotoxinName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PTWI" Type="nvarchar" MaxLength="10" />
+          <Property Name="PTWI_unit" Type="nvarchar" MaxLength="50" />
+          <Property Name="PTWI_ref" Type="nvarchar" MaxLength="50" />
+          <Property Name="cancer_potency" Type="float" />
+          <Property Name="cp_unit" Type="nvarchar" MaxLength="50" />
+          <Property Name="cp_ref" Type="nvarchar" MaxLength="50" />
+          <Property Name="BMDL10" Type="float" />
+          <Property Name="BMDL10_uni" Type="nvarchar" MaxLength="50" />
+          <Property Name="BMDL10_ref" Type="nvarchar" MaxLength="50" />
+          <Property Name="PMTDI" Type="float" />
+          <Property Name="PMTDI_unit" Type="nvarchar" MaxLength="50" />
+          <Property Name="PMTDI_ref" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MycotoxinML">
+          <Key>
+            <PropertyRef Name="pkMycotoxinMLId" />
+          </Key>
+          <Property Name="pkMycotoxinMLId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkMycotoxinId" Type="int" Nullable="false" />
+          <Property Name="ML" Type="float" Nullable="false" />
+          <Property Name="fkUOMId" Type="int" Nullable="false" />
+          <Property Name="fkCommodityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PackagingType">
+          <Key>
+            <PropertyRef Name="pkPackagingTypeId" />
+          </Key>
+          <Property Name="pkPackagingTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackagingTypeCode" Type="char" MaxLength="10" />
+          <Property Name="PackagingTypeText" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PesticideResidue">
+          <Key>
+            <PropertyRef Name="pkPesticideResidueId" />
+          </Key>
+          <Property Name="pkPesticideResidueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PestResName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PestResCode" Type="nchar" MaxLength="10" />
+          <Property Name="ADI" Type="nvarchar" MaxLength="50" />
+          <Property Name="fkADI_UnitId" Type="int" />
+          <Property Name="ARFD" Type="nvarchar" MaxLength="50" />
+          <Property Name="fkARFD_UnitId" Type="int" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="50" />
+          <Property Name="Banned" Type="bit" />
+        </EntityType>
+        <EntityType Name="PestResMRL">
+          <Key>
+            <PropertyRef Name="pkPestResMRLId" />
+          </Key>
+          <Property Name="pkPestResMRLId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkPesticideResidueId" Type="int" Nullable="false" />
+          <Property Name="MRL" Type="float" Nullable="false" />
+          <Property Name="fkUOMId" Type="int" Nullable="false" />
+          <Property Name="fkCommodityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SampleOrigin">
+          <Key>
+            <PropertyRef Name="pkSampleOriginId" />
+          </Key>
+          <Property Name="pkSampleOriginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OriginCode" Type="char" MaxLength="10" />
+          <Property Name="OriginText" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SamplingPlan">
+          <Key>
+            <PropertyRef Name="pkSamplingPlanId" />
+          </Key>
+          <Property Name="pkSamplingPlanId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SamplingPlanCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="SamplingPlanDesc" Type="nvarchar(max)" />
+          <Property Name="ShortCode" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="SamplingReason">
+          <Key>
+            <PropertyRef Name="pkSamplingReasonId" />
+          </Key>
+          <Property Name="pkSamplingReasonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SamplingReasonCode" Type="char" MaxLength="10" />
+          <Property Name="SamplingReasonText" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SamplingType">
+          <Key>
+            <PropertyRef Name="pkSamplingTypeId" />
+          </Key>
+          <Property Name="pkSamplingTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SamplingTypeCode" Type="char" MaxLength="10" />
+          <Property Name="SamplingTypeText" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SourceType">
+          <Key>
+            <PropertyRef Name="pkSourceTypeId" />
+          </Key>
+          <Property Name="pkSourceTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceTypeText" Type="nvarchar" MaxLength="50" />
+          <Property Name="SourceTypeCode" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TestClassification">
+          <Key>
+            <PropertyRef Name="pkTestClassId" />
+          </Key>
+          <Property Name="pkTestClassId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestClass" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="pkUOMId" />
+          </Key>
+          <Property Name="pkUOMId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="unit" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VeterinaryResidue">
+          <Key>
+            <PropertyRef Name="pkVeterinaryResidueId" />
+          </Key>
+          <Property Name="pkVeterinaryResidueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VetResidueName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AntibioticsClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="VetResidueCode" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="VetResMRL">
+          <Key>
+            <PropertyRef Name="pkVetResMRLId" />
+          </Key>
+          <Property Name="pkVetResMRLId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkVetResidueID" Type="int" Nullable="false" />
+          <Property Name="MRL" Type="float" Nullable="false" />
+          <Property Name="fkUOMId" Type="int" Nullable="false" />
+          <Property Name="fkCommodityId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Commodity__fkCom__6D0D32F4">
+          <End Role="Commodity" Type="Self.Commodity" Multiplicity="1" />
+          <End Role="CommodityState" Type="Self.CommodityState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="pkCommodityId" />
+            </Principal>
+            <Dependent Role="CommodityState">
+              <PropertyRef Name="fkCommodityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Individua__fkGov__08B54D69">
+          <End Role="Governorate" Type="Self.Governorate" Multiplicity="1" />
+          <End Role="IndividualConsumption" Type="Self.IndividualConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Governorate">
+              <PropertyRef Name="pkGovernorateId" />
+            </Principal>
+            <Dependent Role="IndividualConsumption">
+              <PropertyRef Name="fkGovernorateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkCaz__0A9D95DB">
+          <End Role="Caza" Type="Self.Caza" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caza">
+              <PropertyRef Name="pkCazaId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkCazaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkCom__0F624AF8">
+          <End Role="CommodityState" Type="Self.CommodityState" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommodityState">
+              <PropertyRef Name="pkCommodityStateId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkCommodityStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkCom__1C873BEC">
+          <End Role="Commodity" Type="Self.Commodity" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="pkCommodityId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkCommodityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkCon__1DB06A4F">
+          <End Role="ContaminantType" Type="Self.ContaminantType" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaminantType">
+              <PropertyRef Name="pkContaminantTypeId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkContaminantTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkGov__09A971A2">
+          <End Role="Governorate" Type="Self.Governorate" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Governorate">
+              <PropertyRef Name="pkGovernorateId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkGovernorateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkLab__1BC821DD">
+          <End Role="Laboratory" Type="Self.Laboratory" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Laboratory">
+              <PropertyRef Name="pkLaboratoryId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkLaboratoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkMyc__1F98B2C1">
+          <End Role="Mycotoxin" Type="Self.Mycotoxin" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mycotoxin">
+              <PropertyRef Name="pkMycotoxinId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkMycotoxinId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkOri__14270015">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="pkCountryId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkOriginCountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkPac__151B244E">
+          <End Role="PackagingType" Type="Self.PackagingType" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackagingType">
+              <PropertyRef Name="pkPackagingTypeId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkPackagingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkPes__1EA48E88">
+          <End Role="PesticideResidue" Type="Self.PesticideResidue" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PesticideResidue">
+              <PropertyRef Name="pkPesticideResidueId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkPesticideResidueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkSam__114A936A">
+          <End Role="SamplingReason" Type="Self.SamplingReason" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SamplingReason">
+              <PropertyRef Name="pkSamplingReasonId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkSamplingReasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkSam__123EB7A3">
+          <End Role="SamplingType" Type="Self.SamplingType" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SamplingType">
+              <PropertyRef Name="pkSamplingTypeId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkSamplingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkSam__1332DBDC">
+          <End Role="SampleOrigin" Type="Self.SampleOrigin" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleOrigin">
+              <PropertyRef Name="pkSampleOriginId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkSampleOriginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkSou__7BE56230">
+          <End Role="SourceType" Type="Self.SourceType" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SourceType">
+              <PropertyRef Name="pkSourceTypeId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkSourceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mycotoxin__fkCom__73852659">
+          <End Role="Commodity" Type="Self.Commodity" Multiplicity="1" />
+          <End Role="MycotoxinML" Type="Self.MycotoxinML" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="pkCommodityId" />
+            </Principal>
+            <Dependent Role="MycotoxinML">
+              <PropertyRef Name="fkCommodityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mycotoxin__fkMyc__7A672E12">
+          <End Role="Mycotoxin" Type="Self.Mycotoxin" Multiplicity="1" />
+          <End Role="MycotoxinML" Type="Self.MycotoxinML" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mycotoxin">
+              <PropertyRef Name="pkMycotoxinId" />
+            </Principal>
+            <Dependent Role="MycotoxinML">
+              <PropertyRef Name="fkMycotoxinId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pesticide__fkADI__02925FBF">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="PesticideResidue" Type="Self.PesticideResidue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkUOMId" />
+            </Principal>
+            <Dependent Role="PesticideResidue">
+              <PropertyRef Name="fkADI_UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pesticide__fkARF__038683F8">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="PesticideResidue" Type="Self.PesticideResidue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkUOMId" />
+            </Principal>
+            <Dependent Role="PesticideResidue">
+              <PropertyRef Name="fkARFD_UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PestResMR__fkCom__6EC0713C">
+          <End Role="Commodity" Type="Self.Commodity" Multiplicity="1" />
+          <End Role="PestResMRL" Type="Self.PestResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="pkCommodityId" />
+            </Principal>
+            <Dependent Role="PestResMRL">
+              <PropertyRef Name="fkCommodityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PestResMR__fkPes__797309D9">
+          <End Role="PesticideResidue" Type="Self.PesticideResidue" Multiplicity="1" />
+          <End Role="PestResMRL" Type="Self.PestResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PesticideResidue">
+              <PropertyRef Name="pkPesticideResidueId" />
+            </Principal>
+            <Dependent Role="PestResMRL">
+              <PropertyRef Name="fkPesticideResidueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VetResMRL__fkCom__3AD6B8E2">
+          <End Role="Commodity" Type="Self.Commodity" Multiplicity="1" />
+          <End Role="VetResMRL" Type="Self.VetResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="pkCommodityId" />
+            </Principal>
+            <Dependent Role="VetResMRL">
+              <PropertyRef Name="fkCommodityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VetResMRL__fkUOM__370627FE">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="1" />
+          <End Role="VetResMRL" Type="Self.VetResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkUOMId" />
+            </Principal>
+            <Dependent Role="VetResMRL">
+              <PropertyRef Name="fkUOMId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VetResMRL__fkUOM__38EE7070">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="1" />
+          <End Role="VetResMRL" Type="Self.VetResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkUOMId" />
+            </Principal>
+            <Dependent Role="VetResMRL">
+              <PropertyRef Name="fkUOMId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VetResMRL__fkVet__39E294A9">
+          <End Role="VeterinaryResidue" Type="Self.VeterinaryResidue" Multiplicity="1" />
+          <End Role="VetResMRL" Type="Self.VetResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VeterinaryResidue">
+              <PropertyRef Name="pkVeterinaryResidueId" />
+            </Principal>
+            <Dependent Role="VetResMRL">
+              <PropertyRef Name="fkVetResidueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SamplingPlanLabSample">
+          <End Role="SamplingPlan" Type="Self.SamplingPlan" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SamplingPlan">
+              <PropertyRef Name="pkSamplingPlanId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="SamplingPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GetGeneratedSamples" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getLabSamplesBetweenDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="getSamplesBetweenDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="FoodSafetyDBModelStoreContainer">
+          <EntitySet Name="Caza" EntityType="Self.Caza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CollectionDesign" EntityType="Self.CollectionDesign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commodity" EntityType="Self.Commodity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommodityState" EntityType="Self.CommodityState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContaminantType" EntityType="Self.ContaminantType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Governorate" EntityType="Self.Governorate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IndividualConsumption" EntityType="Self.IndividualConsumption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Laboratory" EntityType="Self.Laboratory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LabSample" EntityType="Self.LabSample" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mycotoxin" EntityType="Self.Mycotoxin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MycotoxinML" EntityType="Self.MycotoxinML" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackagingType" EntityType="Self.PackagingType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PesticideResidue" EntityType="Self.PesticideResidue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PestResMRL" EntityType="Self.PestResMRL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SampleOrigin" EntityType="Self.SampleOrigin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SamplingPlan" EntityType="Self.SamplingPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SamplingReason" EntityType="Self.SamplingReason" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SamplingType" EntityType="Self.SamplingType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SourceType" EntityType="Self.SourceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestClassification" EntityType="Self.TestClassification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VeterinaryResidue" EntityType="Self.VeterinaryResidue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VetResMRL" EntityType="Self.VetResMRL" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Commodity__fkCom__6D0D32F4" Association="Self.FK__Commodity__fkCom__6D0D32F4">
+            <End Role="Commodity" EntitySet="Commodity" />
+            <End Role="CommodityState" EntitySet="CommodityState" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Individua__fkGov__08B54D69" Association="Self.FK__Individua__fkGov__08B54D69">
+            <End Role="Governorate" EntitySet="Governorate" />
+            <End Role="IndividualConsumption" EntitySet="IndividualConsumption" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkCaz__0A9D95DB" Association="Self.FK__LabSample__fkCaz__0A9D95DB">
+            <End Role="Caza" EntitySet="Caza" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkCom__0F624AF8" Association="Self.FK__LabSample__fkCom__0F624AF8">
+            <End Role="CommodityState" EntitySet="CommodityState" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkCom__1C873BEC" Association="Self.FK__LabSample__fkCom__1C873BEC">
+            <End Role="Commodity" EntitySet="Commodity" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkCon__1DB06A4F" Association="Self.FK__LabSample__fkCon__1DB06A4F">
+            <End Role="ContaminantType" EntitySet="ContaminantType" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkGov__09A971A2" Association="Self.FK__LabSample__fkGov__09A971A2">
+            <End Role="Governorate" EntitySet="Governorate" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkLab__1BC821DD" Association="Self.FK__LabSample__fkLab__1BC821DD">
+            <End Role="Laboratory" EntitySet="Laboratory" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkMyc__1F98B2C1" Association="Self.FK__LabSample__fkMyc__1F98B2C1">
+            <End Role="Mycotoxin" EntitySet="Mycotoxin" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkOri__14270015" Association="Self.FK__LabSample__fkOri__14270015">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkPac__151B244E" Association="Self.FK__LabSample__fkPac__151B244E">
+            <End Role="PackagingType" EntitySet="PackagingType" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkPes__1EA48E88" Association="Self.FK__LabSample__fkPes__1EA48E88">
+            <End Role="PesticideResidue" EntitySet="PesticideResidue" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkSam__114A936A" Association="Self.FK__LabSample__fkSam__114A936A">
+            <End Role="SamplingReason" EntitySet="SamplingReason" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkSam__123EB7A3" Association="Self.FK__LabSample__fkSam__123EB7A3">
+            <End Role="SamplingType" EntitySet="SamplingType" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkSam__1332DBDC" Association="Self.FK__LabSample__fkSam__1332DBDC">
+            <End Role="SampleOrigin" EntitySet="SampleOrigin" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkSou__7BE56230" Association="Self.FK__LabSample__fkSou__7BE56230">
+            <End Role="SourceType" EntitySet="SourceType" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mycotoxin__fkCom__73852659" Association="Self.FK__Mycotoxin__fkCom__73852659">
+            <End Role="Commodity" EntitySet="Commodity" />
+            <End Role="MycotoxinML" EntitySet="MycotoxinML" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mycotoxin__fkMyc__7A672E12" Association="Self.FK__Mycotoxin__fkMyc__7A672E12">
+            <End Role="Mycotoxin" EntitySet="Mycotoxin" />
+            <End Role="MycotoxinML" EntitySet="MycotoxinML" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pesticide__fkADI__02925FBF" Association="Self.FK__Pesticide__fkADI__02925FBF">
+            <End Role="UOM" EntitySet="UOM" />
+            <End Role="PesticideResidue" EntitySet="PesticideResidue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pesticide__fkARF__038683F8" Association="Self.FK__Pesticide__fkARF__038683F8">
+            <End Role="UOM" EntitySet="UOM" />
+            <End Role="PesticideResidue" EntitySet="PesticideResidue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PestResMR__fkCom__6EC0713C" Association="Self.FK__PestResMR__fkCom__6EC0713C">
+            <End Role="Commodity" EntitySet="Commodity" />
+            <End Role="PestResMRL" EntitySet="PestResMRL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PestResMR__fkPes__797309D9" Association="Self.FK__PestResMR__fkPes__797309D9">
+            <End Role="PesticideResidue" EntitySet="PesticideResidue" />
+            <End Role="PestResMRL" EntitySet="PestResMRL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VetResMRL__fkCom__3AD6B8E2" Association="Self.FK__VetResMRL__fkCom__3AD6B8E2">
+            <End Role="Commodity" EntitySet="Commodity" />
+            <End Role="VetResMRL" EntitySet="VetResMRL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VetResMRL__fkUOM__370627FE" Association="Self.FK__VetResMRL__fkUOM__370627FE">
+            <End Role="UOM" EntitySet="UOM" />
+            <End Role="VetResMRL" EntitySet="VetResMRL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VetResMRL__fkUOM__38EE7070" Association="Self.FK__VetResMRL__fkUOM__38EE7070">
+            <End Role="UOM" EntitySet="UOM" />
+            <End Role="VetResMRL" EntitySet="VetResMRL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VetResMRL__fkVet__39E294A9" Association="Self.FK__VetResMRL__fkVet__39E294A9">
+            <End Role="VeterinaryResidue" EntitySet="VeterinaryResidue" />
+            <End Role="VetResMRL" EntitySet="VetResMRL" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SamplingPlanLabSample" Association="Self.fk_SamplingPlanLabSample">
+            <End Role="SamplingPlan" EntitySet="SamplingPlan" />
+            <End Role="LabSample" EntitySet="LabSample" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FoodSafetyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Caza">
+          <Key>
+            <PropertyRef Name="pkCazaId" />
+          </Key>
+          <Property Name="pkCazaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CazaCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CazaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkCaz__0A9D95DB" FromRole="Caza" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="CollectionDesign">
+          <Key>
+            <PropertyRef Name="pkCollectionDesignId" />
+          </Key>
+          <Property Name="pkCollectionDesignId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkLabSampleId" Type="Int32" />
+          <Property Name="fkDesignerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GeneratedDate" Type="DateTime" Precision="3" />
+          <Property Name="fkCollectorId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Commodity">
+          <Key>
+            <PropertyRef Name="pkCommodityId" />
+          </Key>
+          <Property Name="pkCommodityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommodityCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommodityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClassCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CommodityStates" Relationship="Self.FK__Commodity__fkCom__6D0D32F4" FromRole="Commodity" ToRole="CommodityState" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkCom__1C873BEC" FromRole="Commodity" ToRole="LabSample" />
+          <NavigationProperty Name="MycotoxinMLs" Relationship="Self.FK__Mycotoxin__fkCom__73852659" FromRole="Commodity" ToRole="MycotoxinML" />
+          <NavigationProperty Name="PestResMRLs" Relationship="Self.FK__PestResMR__fkCom__6EC0713C" FromRole="Commodity" ToRole="PestResMRL" />
+          <NavigationProperty Name="VetResMRLs" Relationship="Self.FK__VetResMRL__fkCom__3AD6B8E2" FromRole="Commodity" ToRole="VetResMRL" />
+        </EntityType>
+        <EntityType Name="CommodityState">
+          <Key>
+            <PropertyRef Name="pkCommodityStateId" />
+          </Key>
+          <Property Name="pkCommodityStateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkCommodityId" Type="Int32" Nullable="false" />
+          <Property Name="CommodityDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Commodity" Relationship="Self.FK__Commodity__fkCom__6D0D32F4" FromRole="CommodityState" ToRole="Commodity" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkCom__0F624AF8" FromRole="CommodityState" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="ContaminantType">
+          <Key>
+            <PropertyRef Name="pkContaminantTypeId" />
+          </Key>
+          <Property Name="pkContaminantTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContaminantName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContaminantCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkCon__1DB06A4F" FromRole="ContaminantType" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="pkCountryId" />
+          </Key>
+          <Property Name="pkCountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkOri__14270015" FromRole="Country" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="Governorate">
+          <Key>
+            <PropertyRef Name="pkGovernorateId" />
+          </Key>
+          <Property Name="pkGovernorateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GovernorateCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GovernorateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IndividualConsumptions" Relationship="Self.FK__Individua__fkGov__08B54D69" FromRole="Governorate" ToRole="IndividualConsumption" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkGov__09A971A2" FromRole="Governorate" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="IndividualConsumption">
+          <Key>
+            <PropertyRef Name="pkIndividualConsumptionId" />
+          </Key>
+          <Property Name="pkIndividualConsumptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IndividualNumber" Type="Int32" />
+          <Property Name="fkGovernorateId" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="DC" Type="Double" />
+          <Property Name="DM" Type="Double" />
+          <Property Name="DY1" Type="Double" />
+          <Property Name="DY2" Type="Double" />
+          <Property Name="FD4" Type="Double" />
+          <Property Name="FO1" Type="Double" />
+          <Property Name="FO13" Type="Double" />
+          <Property Name="FO14" Type="Double" />
+          <Property Name="FO18" Type="Double" />
+          <Property Name="FO4" Type="Double" />
+          <Property Name="FO5" Type="Double" />
+          <Property Name="FO9" Type="Double" />
+          <Property Name="GR1" Type="Double" />
+          <Property Name="MM001" Type="Double" />
+          <Property Name="MP" Type="Double" />
+          <Property Name="VP001" Type="Double" />
+          <Property Name="VP3" Type="Double" />
+          <Property Name="VR001" Type="Double" />
+          <Property Name="VR1" Type="Double" />
+          <Property Name="VR24" Type="Double" />
+          <Property Name="VR29" Type="Double" />
+          <NavigationProperty Name="Governorate" Relationship="Self.FK__Individua__fkGov__08B54D69" FromRole="IndividualConsumption" ToRole="Governorate" />
+        </EntityType>
+        <EntityType Name="Laboratory">
+          <Key>
+            <PropertyRef Name="pkLaboratoryId" />
+          </Key>
+          <Property Name="pkLaboratoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LaboratoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LaboratoryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LabPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LabEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LabAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkLab__1BC821DD" FromRole="Laboratory" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="LabSample">
+          <Key>
+            <PropertyRef Name="pkLabSampleId" />
+          </Key>
+          <Property Name="pkLabSampleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SampleNb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LabSampleNb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OfficerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OfficerPhoneNb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fkGovernorateId" Type="Int32" />
+          <Property Name="fkCazaId" Type="Int32" />
+          <Property Name="SamplingPlan" Type="Int32" />
+          <Property Name="SampleCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fkCommodityStateId" Type="Int32" />
+          <Property Name="fkSamplingReasonId" Type="Int32" />
+          <Property Name="fkSamplingTypeId" Type="Int32" />
+          <Property Name="PremiseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PremiseType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PremiseAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SamplingDate" Type="DateTime" Precision="0" />
+          <Property Name="SamplingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Distributor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Importer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fkSampleOriginId" Type="Int32" />
+          <Property Name="fkOriginCountryId" Type="Int32" />
+          <Property Name="fkPackagingTypeId" Type="Int32" />
+          <Property Name="PackQuantitySize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BatchLotNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShelfLife" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StorageConditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fkLaboratoryId" Type="Int32" />
+          <Property Name="SampleQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReceivingDate" Type="DateTime" Precision="3" />
+          <Property Name="ReceivingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AnalysisDate" Type="DateTime" Precision="3" />
+          <Property Name="fkContaminantTypeId" Type="Int32" />
+          <Property Name="fkPesticideResidueId" Type="Int32" />
+          <Property Name="fkMycotoxinId" Type="Int32" />
+          <Property Name="AnalysisPortion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AnalysisType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConFinal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fkConUOM" Type="Int32" />
+          <Property Name="LOD" Type="Double" />
+          <Property Name="LOQ" Type="Double" />
+          <Property Name="Uncertainty" Type="Double" />
+          <Property Name="UncertaintyPercent" Type="Double" />
+          <Property Name="ExtractionMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeterminativeMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ComplianceResult" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="fkCommodityId" Type="Int32" />
+          <Property Name="DispatchDate" Type="DateTime" Precision="3" />
+          <Property Name="CloseCaseDate" Type="DateTime" Precision="3" />
+          <Property Name="Notes_Designer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes_Collector" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lab_Rejection_Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Collection_Due_Date" Type="DateTime" Precision="3" />
+          <Property Name="Collection_Start_Date" Type="DateTime" Precision="3" />
+          <Property Name="fkSourceTypeId" Type="Int32" />
+          <Property Name="SourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SourceAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SourceContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SourceContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CollectedQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ViolationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Caza" Relationship="Self.FK__LabSample__fkCaz__0A9D95DB" FromRole="LabSample" ToRole="Caza" />
+          <NavigationProperty Name="Commodity" Relationship="Self.FK__LabSample__fkCom__1C873BEC" FromRole="LabSample" ToRole="Commodity" />
+          <NavigationProperty Name="CommodityState" Relationship="Self.FK__LabSample__fkCom__0F624AF8" FromRole="LabSample" ToRole="CommodityState" />
+          <NavigationProperty Name="ContaminantType" Relationship="Self.FK__LabSample__fkCon__1DB06A4F" FromRole="LabSample" ToRole="ContaminantType" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__LabSample__fkOri__14270015" FromRole="LabSample" ToRole="Country" />
+          <NavigationProperty Name="Governorate" Relationship="Self.FK__LabSample__fkGov__09A971A2" FromRole="LabSample" ToRole="Governorate" />
+          <NavigationProperty Name="Laboratory" Relationship="Self.FK__LabSample__fkLab__1BC821DD" FromRole="LabSample" ToRole="Laboratory" />
+          <NavigationProperty Name="Mycotoxin" Relationship="Self.FK__LabSample__fkMyc__1F98B2C1" FromRole="LabSample" ToRole="Mycotoxin" />
+          <NavigationProperty Name="PackagingType" Relationship="Self.FK__LabSample__fkPac__151B244E" FromRole="LabSample" ToRole="PackagingType" />
+          <NavigationProperty Name="PesticideResidue" Relationship="Self.FK__LabSample__fkPes__1EA48E88" FromRole="LabSample" ToRole="PesticideResidue" />
+          <NavigationProperty Name="SamplingReason" Relationship="Self.FK__LabSample__fkSam__114A936A" FromRole="LabSample" ToRole="SamplingReason" />
+          <NavigationProperty Name="SamplingType" Relationship="Self.FK__LabSample__fkSam__123EB7A3" FromRole="LabSample" ToRole="SamplingType" />
+          <NavigationProperty Name="SampleOrigin" Relationship="Self.FK__LabSample__fkSam__1332DBDC" FromRole="LabSample" ToRole="SampleOrigin" />
+          <NavigationProperty Name="SourceType" Relationship="Self.FK__LabSample__fkSou__7BE56230" FromRole="LabSample" ToRole="SourceType" />
+          <NavigationProperty Name="SamplingPlan1" Relationship="Self.fk_SamplingPlanLabSample" FromRole="LabSample" ToRole="SamplingPlan" />
+        </EntityType>
+        <EntityType Name="Mycotoxin">
+          <Key>
+            <PropertyRef Name="pkMycotoxinId" />
+          </Key>
+          <Property Name="pkMycotoxinId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MycotoxinName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PTWI" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PTWI_unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PTWI_ref" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cancer_potency" Type="Double" />
+          <Property Name="cp_unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cp_ref" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BMDL10" Type="Double" />
+          <Property Name="BMDL10_uni" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BMDL10_ref" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PMTDI" Type="Double" />
+          <Property Name="PMTDI_unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PMTDI_ref" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkMyc__1F98B2C1" FromRole="Mycotoxin" ToRole="LabSample" />
+          <NavigationProperty Name="MycotoxinMLs" Relationship="Self.FK__Mycotoxin__fkMyc__7A672E12" FromRole="Mycotoxin" ToRole="MycotoxinML" />
+        </EntityType>
+        <EntityType Name="MycotoxinML">
+          <Key>
+            <PropertyRef Name="pkMycotoxinMLId" />
+          </Key>
+          <Property Name="pkMycotoxinMLId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkMycotoxinId" Type="Int32" Nullable="false" />
+          <Property Name="ML" Type="Double" Nullable="false" />
+          <Property Name="fkUOMId" Type="Int32" Nullable="false" />
+          <Property Name="fkCommodityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Commodity" Relationship="Self.FK__Mycotoxin__fkCom__73852659" FromRole="MycotoxinML" ToRole="Commodity" />
+          <NavigationProperty Name="Mycotoxin" Relationship="Self.FK__Mycotoxin__fkMyc__7A672E12" FromRole="MycotoxinML" ToRole="Mycotoxin" />
+        </EntityType>
+        <EntityType Name="PackagingType">
+          <Key>
+            <PropertyRef Name="pkPackagingTypeId" />
+          </Key>
+          <Property Name="pkPackagingTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackagingTypeCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="PackagingTypeText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkPac__151B244E" FromRole="PackagingType" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="PesticideResidue">
+          <Key>
+            <PropertyRef Name="pkPesticideResidueId" />
+          </Key>
+          <Property Name="pkPesticideResidueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PestResName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PestResCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ADI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fkADI_UnitId" Type="Int32" />
+          <Property Name="ARFD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fkARFD_UnitId" Type="Int32" />
+          <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Banned" Type="Boolean" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkPes__1EA48E88" FromRole="PesticideResidue" ToRole="LabSample" />
+          <NavigationProperty Name="UOM" Relationship="Self.FK__Pesticide__fkADI__02925FBF" FromRole="PesticideResidue" ToRole="UOM" />
+          <NavigationProperty Name="UOM1" Relationship="Self.FK__Pesticide__fkARF__038683F8" FromRole="PesticideResidue" ToRole="UOM" />
+          <NavigationProperty Name="PestResMRLs" Relationship="Self.FK__PestResMR__fkPes__797309D9" FromRole="PesticideResidue" ToRole="PestResMRL" />
+        </EntityType>
+        <EntityType Name="PestResMRL">
+          <Key>
+            <PropertyRef Name="pkPestResMRLId" />
+          </Key>
+          <Property Name="pkPestResMRLId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkPesticideResidueId" Type="Int32" Nullable="false" />
+          <Property Name="MRL" Type="Double" Nullable="false" />
+          <Property Name="fkUOMId" Type="Int32" Nullable="false" />
+          <Property Name="fkCommodityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Commodity" Relationship="Self.FK__PestResMR__fkCom__6EC0713C" FromRole="PestResMRL" ToRole="Commodity" />
+          <NavigationProperty Name="PesticideResidue" Relationship="Self.FK__PestResMR__fkPes__797309D9" FromRole="PestResMRL" ToRole="PesticideResidue" />
+        </EntityType>
+        <EntityType Name="SampleOrigin">
+          <Key>
+            <PropertyRef Name="pkSampleOriginId" />
+          </Key>
+          <Property Name="pkSampleOriginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OriginCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="OriginText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkSam__1332DBDC" FromRole="SampleOrigin" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="SamplingPlan">
+          <Key>
+            <PropertyRef Name="pkSamplingPlanId" />
+          </Key>
+          <Property Name="pkSamplingPlanId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SamplingPlanCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SamplingPlanDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShortCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.fk_SamplingPlanLabSample" FromRole="SamplingPlan" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="SamplingReason">
+          <Key>
+            <PropertyRef Name="pkSamplingReasonId" />
+          </Key>
+          <Property Name="pkSamplingReasonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SamplingReasonCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="SamplingReasonText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkSam__114A936A" FromRole="SamplingReason" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="SamplingType">
+          <Key>
+            <PropertyRef Name="pkSamplingTypeId" />
+          </Key>
+          <Property Name="pkSamplingTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SamplingTypeCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="SamplingTypeText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkSam__123EB7A3" FromRole="SamplingType" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="SourceType">
+          <Key>
+            <PropertyRef Name="pkSourceTypeId" />
+          </Key>
+          <Property Name="pkSourceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceTypeText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SourceTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LabSamples" Relationship="Self.FK__LabSample__fkSou__7BE56230" FromRole="SourceType" ToRole="LabSample" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TestClassification">
+          <Key>
+            <PropertyRef Name="pkTestClassId" />
+          </Key>
+          <Property Name="pkTestClassId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="pkUOMId" />
+          </Key>
+          <Property Name="pkUOMId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PesticideResidues" Relationship="Self.FK__Pesticide__fkADI__02925FBF" FromRole="UOM" ToRole="PesticideResidue" />
+          <NavigationProperty Name="PesticideResidues1" Relationship="Self.FK__Pesticide__fkARF__038683F8" FromRole="UOM" ToRole="PesticideResidue" />
+          <NavigationProperty Name="VetResMRLs" Relationship="Self.FK__VetResMRL__fkUOM__370627FE" FromRole="UOM" ToRole="VetResMRL" />
+          <NavigationProperty Name="VetResMRLs1" Relationship="Self.FK__VetResMRL__fkUOM__38EE7070" FromRole="UOM" ToRole="VetResMRL" />
+        </EntityType>
+        <EntityType Name="VeterinaryResidue">
+          <Key>
+            <PropertyRef Name="pkVeterinaryResidueId" />
+          </Key>
+          <Property Name="pkVeterinaryResidueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VetResidueName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AntibioticsClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VetResidueCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="VetResMRLs" Relationship="Self.FK__VetResMRL__fkVet__39E294A9" FromRole="VeterinaryResidue" ToRole="VetResMRL" />
+        </EntityType>
+        <EntityType Name="VetResMRL">
+          <Key>
+            <PropertyRef Name="pkVetResMRLId" />
+          </Key>
+          <Property Name="pkVetResMRLId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkVetResidueID" Type="Int32" Nullable="false" />
+          <Property Name="MRL" Type="Double" Nullable="false" />
+          <Property Name="fkUOMId" Type="Int32" Nullable="false" />
+          <Property Name="fkCommodityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Commodity" Relationship="Self.FK__VetResMRL__fkCom__3AD6B8E2" FromRole="VetResMRL" ToRole="Commodity" />
+          <NavigationProperty Name="UOM" Relationship="Self.FK__VetResMRL__fkUOM__370627FE" FromRole="VetResMRL" ToRole="UOM" />
+          <NavigationProperty Name="UOM1" Relationship="Self.FK__VetResMRL__fkUOM__38EE7070" FromRole="VetResMRL" ToRole="UOM" />
+          <NavigationProperty Name="VeterinaryResidue" Relationship="Self.FK__VetResMRL__fkVet__39E294A9" FromRole="VetResMRL" ToRole="VeterinaryResidue" />
+        </EntityType>
+        <Association Name="FK__LabSample__fkCaz__0A9D95DB">
+          <End Role="Caza" Type="Self.Caza" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caza">
+              <PropertyRef Name="pkCazaId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkCazaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Commodity__fkCom__6D0D32F4">
+          <End Role="Commodity" Type="Self.Commodity" Multiplicity="1" />
+          <End Role="CommodityState" Type="Self.CommodityState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="pkCommodityId" />
+            </Principal>
+            <Dependent Role="CommodityState">
+              <PropertyRef Name="fkCommodityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkCom__1C873BEC">
+          <End Role="Commodity" Type="Self.Commodity" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="pkCommodityId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkCommodityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mycotoxin__fkCom__73852659">
+          <End Role="Commodity" Type="Self.Commodity" Multiplicity="1" />
+          <End Role="MycotoxinML" Type="Self.MycotoxinML" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="pkCommodityId" />
+            </Principal>
+            <Dependent Role="MycotoxinML">
+              <PropertyRef Name="fkCommodityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PestResMR__fkCom__6EC0713C">
+          <End Role="Commodity" Type="Self.Commodity" Multiplicity="1" />
+          <End Role="PestResMRL" Type="Self.PestResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="pkCommodityId" />
+            </Principal>
+            <Dependent Role="PestResMRL">
+              <PropertyRef Name="fkCommodityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VetResMRL__fkCom__3AD6B8E2">
+          <End Role="Commodity" Type="Self.Commodity" Multiplicity="1" />
+          <End Role="VetResMRL" Type="Self.VetResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="pkCommodityId" />
+            </Principal>
+            <Dependent Role="VetResMRL">
+              <PropertyRef Name="fkCommodityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkCom__0F624AF8">
+          <End Role="CommodityState" Type="Self.CommodityState" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommodityState">
+              <PropertyRef Name="pkCommodityStateId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkCommodityStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkCon__1DB06A4F">
+          <End Role="ContaminantType" Type="Self.ContaminantType" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaminantType">
+              <PropertyRef Name="pkContaminantTypeId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkContaminantTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkOri__14270015">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="pkCountryId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkOriginCountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Individua__fkGov__08B54D69">
+          <End Role="Governorate" Type="Self.Governorate" Multiplicity="1" />
+          <End Role="IndividualConsumption" Type="Self.IndividualConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Governorate">
+              <PropertyRef Name="pkGovernorateId" />
+            </Principal>
+            <Dependent Role="IndividualConsumption">
+              <PropertyRef Name="fkGovernorateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkGov__09A971A2">
+          <End Role="Governorate" Type="Self.Governorate" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Governorate">
+              <PropertyRef Name="pkGovernorateId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkGovernorateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkLab__1BC821DD">
+          <End Role="Laboratory" Type="Self.Laboratory" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Laboratory">
+              <PropertyRef Name="pkLaboratoryId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkLaboratoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkMyc__1F98B2C1">
+          <End Role="Mycotoxin" Type="Self.Mycotoxin" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mycotoxin">
+              <PropertyRef Name="pkMycotoxinId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkMycotoxinId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkPac__151B244E">
+          <End Role="PackagingType" Type="Self.PackagingType" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackagingType">
+              <PropertyRef Name="pkPackagingTypeId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkPackagingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkPes__1EA48E88">
+          <End Role="PesticideResidue" Type="Self.PesticideResidue" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PesticideResidue">
+              <PropertyRef Name="pkPesticideResidueId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkPesticideResidueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkSam__114A936A">
+          <End Role="SamplingReason" Type="Self.SamplingReason" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SamplingReason">
+              <PropertyRef Name="pkSamplingReasonId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkSamplingReasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkSam__123EB7A3">
+          <End Role="SamplingType" Type="Self.SamplingType" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SamplingType">
+              <PropertyRef Name="pkSamplingTypeId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkSamplingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkSam__1332DBDC">
+          <End Role="SampleOrigin" Type="Self.SampleOrigin" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleOrigin">
+              <PropertyRef Name="pkSampleOriginId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkSampleOriginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabSample__fkSou__7BE56230">
+          <End Role="SourceType" Type="Self.SourceType" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SourceType">
+              <PropertyRef Name="pkSourceTypeId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="fkSourceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SamplingPlanLabSample">
+          <End Role="SamplingPlan" Type="Self.SamplingPlan" Multiplicity="0..1" />
+          <End Role="LabSample" Type="Self.LabSample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SamplingPlan">
+              <PropertyRef Name="pkSamplingPlanId" />
+            </Principal>
+            <Dependent Role="LabSample">
+              <PropertyRef Name="SamplingPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mycotoxin__fkMyc__7A672E12">
+          <End Role="Mycotoxin" Type="Self.Mycotoxin" Multiplicity="1" />
+          <End Role="MycotoxinML" Type="Self.MycotoxinML" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mycotoxin">
+              <PropertyRef Name="pkMycotoxinId" />
+            </Principal>
+            <Dependent Role="MycotoxinML">
+              <PropertyRef Name="fkMycotoxinId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pesticide__fkADI__02925FBF">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="PesticideResidue" Type="Self.PesticideResidue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkUOMId" />
+            </Principal>
+            <Dependent Role="PesticideResidue">
+              <PropertyRef Name="fkADI_UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pesticide__fkARF__038683F8">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="PesticideResidue" Type="Self.PesticideResidue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkUOMId" />
+            </Principal>
+            <Dependent Role="PesticideResidue">
+              <PropertyRef Name="fkARFD_UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PestResMR__fkPes__797309D9">
+          <End Role="PesticideResidue" Type="Self.PesticideResidue" Multiplicity="1" />
+          <End Role="PestResMRL" Type="Self.PestResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PesticideResidue">
+              <PropertyRef Name="pkPesticideResidueId" />
+            </Principal>
+            <Dependent Role="PestResMRL">
+              <PropertyRef Name="fkPesticideResidueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VetResMRL__fkUOM__370627FE">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="1" />
+          <End Role="VetResMRL" Type="Self.VetResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkUOMId" />
+            </Principal>
+            <Dependent Role="VetResMRL">
+              <PropertyRef Name="fkUOMId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VetResMRL__fkUOM__38EE7070">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="1" />
+          <End Role="VetResMRL" Type="Self.VetResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="pkUOMId" />
+            </Principal>
+            <Dependent Role="VetResMRL">
+              <PropertyRef Name="fkUOMId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VetResMRL__fkVet__39E294A9">
+          <End Role="VeterinaryResidue" Type="Self.VeterinaryResidue" Multiplicity="1" />
+          <End Role="VetResMRL" Type="Self.VetResMRL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VeterinaryResidue">
+              <PropertyRef Name="pkVeterinaryResidueId" />
+            </Principal>
+            <Dependent Role="VetResMRL">
+              <PropertyRef Name="fkVetResidueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FoodSafetyDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cazas" EntityType="Self.Caza" />
+          <EntitySet Name="CollectionDesigns" EntityType="Self.CollectionDesign" />
+          <EntitySet Name="Commodities" EntityType="Self.Commodity" />
+          <EntitySet Name="CommodityStates" EntityType="Self.CommodityState" />
+          <EntitySet Name="ContaminantTypes" EntityType="Self.ContaminantType" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Governorates" EntityType="Self.Governorate" />
+          <EntitySet Name="IndividualConsumptions" EntityType="Self.IndividualConsumption" />
+          <EntitySet Name="Laboratories" EntityType="Self.Laboratory" />
+          <EntitySet Name="LabSamples" EntityType="Self.LabSample" />
+          <EntitySet Name="Mycotoxins" EntityType="Self.Mycotoxin" />
+          <EntitySet Name="MycotoxinMLs" EntityType="Self.MycotoxinML" />
+          <EntitySet Name="PackagingTypes" EntityType="Self.PackagingType" />
+          <EntitySet Name="PesticideResidues" EntityType="Self.PesticideResidue" />
+          <EntitySet Name="PestResMRLs" EntityType="Self.PestResMRL" />
+          <EntitySet Name="SampleOrigins" EntityType="Self.SampleOrigin" />
+          <EntitySet Name="SamplingPlans" EntityType="Self.SamplingPlan" />
+          <EntitySet Name="SamplingReasons" EntityType="Self.SamplingReason" />
+          <EntitySet Name="SamplingTypes" EntityType="Self.SamplingType" />
+          <EntitySet Name="SourceTypes" EntityType="Self.SourceType" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TestClassifications" EntityType="Self.TestClassification" />
+          <EntitySet Name="UOMs" EntityType="Self.UOM" />
+          <EntitySet Name="VeterinaryResidues" EntityType="Self.VeterinaryResidue" />
+          <EntitySet Name="VetResMRLs" EntityType="Self.VetResMRL" />
+          <AssociationSet Name="FK__LabSample__fkCaz__0A9D95DB" Association="Self.FK__LabSample__fkCaz__0A9D95DB">
+            <End Role="Caza" EntitySet="Cazas" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Commodity__fkCom__6D0D32F4" Association="Self.FK__Commodity__fkCom__6D0D32F4">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="CommodityState" EntitySet="CommodityStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkCom__1C873BEC" Association="Self.FK__LabSample__fkCom__1C873BEC">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mycotoxin__fkCom__73852659" Association="Self.FK__Mycotoxin__fkCom__73852659">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="MycotoxinML" EntitySet="MycotoxinMLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PestResMR__fkCom__6EC0713C" Association="Self.FK__PestResMR__fkCom__6EC0713C">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="PestResMRL" EntitySet="PestResMRLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VetResMRL__fkCom__3AD6B8E2" Association="Self.FK__VetResMRL__fkCom__3AD6B8E2">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="VetResMRL" EntitySet="VetResMRLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkCom__0F624AF8" Association="Self.FK__LabSample__fkCom__0F624AF8">
+            <End Role="CommodityState" EntitySet="CommodityStates" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkCon__1DB06A4F" Association="Self.FK__LabSample__fkCon__1DB06A4F">
+            <End Role="ContaminantType" EntitySet="ContaminantTypes" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkOri__14270015" Association="Self.FK__LabSample__fkOri__14270015">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Individua__fkGov__08B54D69" Association="Self.FK__Individua__fkGov__08B54D69">
+            <End Role="Governorate" EntitySet="Governorates" />
+            <End Role="IndividualConsumption" EntitySet="IndividualConsumptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkGov__09A971A2" Association="Self.FK__LabSample__fkGov__09A971A2">
+            <End Role="Governorate" EntitySet="Governorates" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkLab__1BC821DD" Association="Self.FK__LabSample__fkLab__1BC821DD">
+            <End Role="Laboratory" EntitySet="Laboratories" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkMyc__1F98B2C1" Association="Self.FK__LabSample__fkMyc__1F98B2C1">
+            <End Role="Mycotoxin" EntitySet="Mycotoxins" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkPac__151B244E" Association="Self.FK__LabSample__fkPac__151B244E">
+            <End Role="PackagingType" EntitySet="PackagingTypes" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkPes__1EA48E88" Association="Self.FK__LabSample__fkPes__1EA48E88">
+            <End Role="PesticideResidue" EntitySet="PesticideResidues" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkSam__114A936A" Association="Self.FK__LabSample__fkSam__114A936A">
+            <End Role="SamplingReason" EntitySet="SamplingReasons" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkSam__123EB7A3" Association="Self.FK__LabSample__fkSam__123EB7A3">
+            <End Role="SamplingType" EntitySet="SamplingTypes" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkSam__1332DBDC" Association="Self.FK__LabSample__fkSam__1332DBDC">
+            <End Role="SampleOrigin" EntitySet="SampleOrigins" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabSample__fkSou__7BE56230" Association="Self.FK__LabSample__fkSou__7BE56230">
+            <End Role="SourceType" EntitySet="SourceTypes" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SamplingPlanLabSample" Association="Self.fk_SamplingPlanLabSample">
+            <End Role="SamplingPlan" EntitySet="SamplingPlans" />
+            <End Role="LabSample" EntitySet="LabSamples" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mycotoxin__fkMyc__7A672E12" Association="Self.FK__Mycotoxin__fkMyc__7A672E12">
+            <End Role="Mycotoxin" EntitySet="Mycotoxins" />
+            <End Role="MycotoxinML" EntitySet="MycotoxinMLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pesticide__fkADI__02925FBF" Association="Self.FK__Pesticide__fkADI__02925FBF">
+            <End Role="UOM" EntitySet="UOMs" />
+            <End Role="PesticideResidue" EntitySet="PesticideResidues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pesticide__fkARF__038683F8" Association="Self.FK__Pesticide__fkARF__038683F8">
+            <End Role="UOM" EntitySet="UOMs" />
+            <End Role="PesticideResidue" EntitySet="PesticideResidues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PestResMR__fkPes__797309D9" Association="Self.FK__PestResMR__fkPes__797309D9">
+            <End Role="PesticideResidue" EntitySet="PesticideResidues" />
+            <End Role="PestResMRL" EntitySet="PestResMRLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VetResMRL__fkUOM__370627FE" Association="Self.FK__VetResMRL__fkUOM__370627FE">
+            <End Role="UOM" EntitySet="UOMs" />
+            <End Role="VetResMRL" EntitySet="VetResMRLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VetResMRL__fkUOM__38EE7070" Association="Self.FK__VetResMRL__fkUOM__38EE7070">
+            <End Role="UOM" EntitySet="UOMs" />
+            <End Role="VetResMRL" EntitySet="VetResMRLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VetResMRL__fkVet__39E294A9" Association="Self.FK__VetResMRL__fkVet__39E294A9">
+            <End Role="VeterinaryResidue" EntitySet="VeterinaryResidues" />
+            <End Role="VetResMRL" EntitySet="VetResMRLs" />
+          </AssociationSet>
+          <FunctionImport Name="GetGeneratedSamples" ReturnType="Collection(FoodSafetyDBModel.GetGeneratedSamples_Result)" />
+          <FunctionImport Name="getLabSamplesBetweenDates" ReturnType="Collection(FoodSafetyDBModel.getLabSamplesBetweenDates_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="getSamplesBetweenDates" ReturnType="Collection(FoodSafetyDBModel.getSamplesBetweenDates_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FoodSafetyDBModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FoodSafetyDBModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="GetGeneratedSamples_Result">
+          <Property Type="Int32" Name="pkLabSampleId" Nullable="true" />
+          <Property Type="String" Name="SampleNb" Nullable="true" />
+          <Property Type="String" Name="LabSampleNb" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OfficerName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OfficerPhoneNb" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="fkGovernorateId" Nullable="true" />
+          <Property Type="Int32" Name="fkCazaId" Nullable="true" />
+          <Property Type="Int32" Name="SamplingPlan" Nullable="true" />
+          <Property Type="String" Name="SampleCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="fkCommodityStateId" Nullable="true" />
+          <Property Type="Int32" Name="fkSamplingReasonId" Nullable="true" />
+          <Property Type="Int32" Name="fkSamplingTypeId" Nullable="true" />
+          <Property Type="String" Name="PremiseName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PremiseType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PremiseAddress" Nullable="true" />
+          <Property Type="String" Name="ContactName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ContactPhoneNumber" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="SamplingDate" Nullable="true" />
+          <Property Type="String" Name="SamplingTime" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BrandName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Manufacturer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Distributor" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Importer" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="fkSampleOriginId" Nullable="true" />
+          <Property Type="Int32" Name="fkOriginCountryId" Nullable="true" />
+          <Property Type="Int32" Name="fkPackagingTypeId" Nullable="true" />
+          <Property Type="String" Name="PackQuantitySize" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BatchLotNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ShelfLife" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="StorageConditions" Nullable="true" />
+          <Property Type="Int32" Name="fkLaboratoryId" Nullable="true" />
+          <Property Type="String" Name="SampleQuantity" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ReceivingDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReceivingTime" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="AnalysisDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="fkContaminantTypeId" Nullable="true" />
+          <Property Type="Int32" Name="fkPesticideResidueId" Nullable="true" />
+          <Property Type="Int32" Name="fkMycotoxinId" Nullable="true" />
+          <Property Type="String" Name="AnalysisPortion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AnalysisType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ConFinal" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="fkConUOM" Nullable="true" />
+          <Property Type="Double" Name="LOD" Nullable="true" />
+          <Property Type="Double" Name="LOQ" Nullable="true" />
+          <Property Type="Double" Name="Uncertainty" Nullable="true" />
+          <Property Type="Double" Name="UncertaintyPercent" Nullable="true" />
+          <Property Type="String" Name="ExtractionMethod" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DeterminativeMethod" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ComplianceResult" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="fkCommodityId" Nullable="true" />
+          <Property Type="DateTime" Name="DispatchDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="CloseCaseDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Notes_Designer" Nullable="true" />
+          <Property Type="String" Name="Notes_Collector" Nullable="true" />
+          <Property Type="String" Name="Lab_Rejection_Comment" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Collection_Due_Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Collection_Start_Date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="fkSourceTypeId" Nullable="true" />
+          <Property Type="String" Name="SourceName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SourceAddress" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SourceContactName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SourceContactNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CollectedQuantity" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ViolationType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="pkCollectionDesignId" Nullable="true" />
+          <Property Type="Int32" Name="fkLabSampleId" Nullable="true" />
+          <Property Type="String" Name="fkDesignerId" Nullable="true" MaxLength="128" />
+          <Property Type="DateTime" Name="GeneratedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="fkCollectorId" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="pkLaboratoryId" Nullable="true" />
+          <Property Type="String" Name="LaboratoryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LaboratoryCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LabPhoneNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LabEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LabAddress" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="getLabSamplesBetweenDates_Result">
+          <Property Type="String" Name="SampleNb" Nullable="false" />
+          <Property Type="DateTime" Name="AnalysisDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="AnalysisPortion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AnalysisType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ConFinal" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="unit" Nullable="true" />
+          <Property Type="String" Name="DeterminativeMethod" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ExtractionMethod" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PestResName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MycotoxinName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CommodityName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GovernorateName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CommodityDescription" Nullable="true" />
+          <Property Type="Double" Name="Uncertainty" Nullable="true" />
+          <Property Type="Double" Name="UncertaintyPercent" Nullable="true" />
+          <Property Type="DateTime" Name="SamplingDate" Nullable="true" />
+          <Property Type="Double" Name="LOD" Nullable="true" />
+          <Property Type="Double" Name="LOQ" Nullable="true" />
+          <Property Type="Int32" Name="SamplingPlan" Nullable="true" />
+          <Property Type="String" Name="PremiseName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PackQuantitySize" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="getSamplesBetweenDates_Result">
+          <Property Type="String" Name="SampleNb" Nullable="false" />
+          <Property Type="DateTime" Name="AnalysisDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="AnalysisPortion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AnalysisType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ConFinal" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="unit" Nullable="true" />
+          <Property Type="String" Name="DeterminativeMethod" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ExtractionMethod" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PestResName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MycotoxinName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CommodityName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GovernorateName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CommodityDescription" Nullable="true" />
+          <Property Type="Double" Name="Uncertainty" Nullable="true" />
+          <Property Type="Double" Name="UncertaintyPercent" Nullable="true" />
+          <Property Type="DateTime" Name="SamplingDate" Nullable="true" />
+          <Property Type="Double" Name="LOD" Nullable="true" />
+          <Property Type="Double" Name="LOQ" Nullable="true" />
+          <Property Type="Int32" Name="SamplingPlan" Nullable="true" />
+          <Property Type="String" Name="PremiseName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PackQuantitySize" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FoodSafetyDBModelStoreContainer" CdmEntityContainer="FoodSafetyDBEntities">
+          <EntitySetMapping Name="Cazas">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.Caza">
+              <MappingFragment StoreEntitySet="Caza">
+                <ScalarProperty Name="pkCazaId" ColumnName="pkCazaId" />
+                <ScalarProperty Name="CazaCode" ColumnName="CazaCode" />
+                <ScalarProperty Name="CazaName" ColumnName="CazaName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CollectionDesigns">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.CollectionDesign">
+              <MappingFragment StoreEntitySet="CollectionDesign">
+                <ScalarProperty Name="pkCollectionDesignId" ColumnName="pkCollectionDesignId" />
+                <ScalarProperty Name="fkLabSampleId" ColumnName="fkLabSampleId" />
+                <ScalarProperty Name="fkDesignerId" ColumnName="fkDesignerId" />
+                <ScalarProperty Name="GeneratedDate" ColumnName="GeneratedDate" />
+                <ScalarProperty Name="fkCollectorId" ColumnName="fkCollectorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commodities">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.Commodity">
+              <MappingFragment StoreEntitySet="Commodity">
+                <ScalarProperty Name="pkCommodityId" ColumnName="pkCommodityId" />
+                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+                <ScalarProperty Name="ClassCode" ColumnName="ClassCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommodityStates">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.CommodityState">
+              <MappingFragment StoreEntitySet="CommodityState">
+                <ScalarProperty Name="pkCommodityStateId" ColumnName="pkCommodityStateId" />
+                <ScalarProperty Name="fkCommodityId" ColumnName="fkCommodityId" />
+                <ScalarProperty Name="CommodityDescription" ColumnName="CommodityDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContaminantTypes">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.ContaminantType">
+              <MappingFragment StoreEntitySet="ContaminantType">
+                <ScalarProperty Name="pkContaminantTypeId" ColumnName="pkContaminantTypeId" />
+                <ScalarProperty Name="ContaminantName" ColumnName="ContaminantName" />
+                <ScalarProperty Name="ContaminantCode" ColumnName="ContaminantCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="pkCountryId" ColumnName="pkCountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Governorates">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.Governorate">
+              <MappingFragment StoreEntitySet="Governorate">
+                <ScalarProperty Name="pkGovernorateId" ColumnName="pkGovernorateId" />
+                <ScalarProperty Name="GovernorateCode" ColumnName="GovernorateCode" />
+                <ScalarProperty Name="GovernorateName" ColumnName="GovernorateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndividualConsumptions">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.IndividualConsumption">
+              <MappingFragment StoreEntitySet="IndividualConsumption">
+                <ScalarProperty Name="pkIndividualConsumptionId" ColumnName="pkIndividualConsumptionId" />
+                <ScalarProperty Name="IndividualNumber" ColumnName="IndividualNumber" />
+                <ScalarProperty Name="fkGovernorateId" ColumnName="fkGovernorateId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="DC" ColumnName="DC" />
+                <ScalarProperty Name="DM" ColumnName="DM" />
+                <ScalarProperty Name="DY1" ColumnName="DY1" />
+                <ScalarProperty Name="DY2" ColumnName="DY2" />
+                <ScalarProperty Name="FD4" ColumnName="FD4" />
+                <ScalarProperty Name="FO1" ColumnName="FO1" />
+                <ScalarProperty Name="FO13" ColumnName="FO13" />
+                <ScalarProperty Name="FO14" ColumnName="FO14" />
+                <ScalarProperty Name="FO18" ColumnName="FO18" />
+                <ScalarProperty Name="FO4" ColumnName="FO4" />
+                <ScalarProperty Name="FO5" ColumnName="FO5" />
+                <ScalarProperty Name="FO9" ColumnName="FO9" />
+                <ScalarProperty Name="GR1" ColumnName="GR1" />
+                <ScalarProperty Name="MM001" ColumnName="MM001" />
+                <ScalarProperty Name="MP" ColumnName="MP" />
+                <ScalarProperty Name="VP001" ColumnName="VP001" />
+                <ScalarProperty Name="VP3" ColumnName="VP3" />
+                <ScalarProperty Name="VR001" ColumnName="VR001" />
+                <ScalarProperty Name="VR1" ColumnName="VR1" />
+                <ScalarProperty Name="VR24" ColumnName="VR24" />
+                <ScalarProperty Name="VR29" ColumnName="VR29" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Laboratories">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.Laboratory">
+              <MappingFragment StoreEntitySet="Laboratory">
+                <ScalarProperty Name="pkLaboratoryId" ColumnName="pkLaboratoryId" />
+                <ScalarProperty Name="LaboratoryName" ColumnName="LaboratoryName" />
+                <ScalarProperty Name="LaboratoryCode" ColumnName="LaboratoryCode" />
+                <ScalarProperty Name="LabPhoneNumber" ColumnName="LabPhoneNumber" />
+                <ScalarProperty Name="LabEmail" ColumnName="LabEmail" />
+                <ScalarProperty Name="LabAddress" ColumnName="LabAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabSamples">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.LabSample">
+              <MappingFragment StoreEntitySet="LabSample">
+                <ScalarProperty Name="pkLabSampleId" ColumnName="pkLabSampleId" />
+                <ScalarProperty Name="SampleNb" ColumnName="SampleNb" />
+                <ScalarProperty Name="LabSampleNb" ColumnName="LabSampleNb" />
+                <ScalarProperty Name="OfficerName" ColumnName="OfficerName" />
+                <ScalarProperty Name="OfficerPhoneNb" ColumnName="OfficerPhoneNb" />
+                <ScalarProperty Name="fkGovernorateId" ColumnName="fkGovernorateId" />
+                <ScalarProperty Name="fkCazaId" ColumnName="fkCazaId" />
+                <ScalarProperty Name="SamplingPlan" ColumnName="SamplingPlan" />
+                <ScalarProperty Name="SampleCode" ColumnName="SampleCode" />
+                <ScalarProperty Name="fkCommodityStateId" ColumnName="fkCommodityStateId" />
+                <ScalarProperty Name="fkSamplingReasonId" ColumnName="fkSamplingReasonId" />
+                <ScalarProperty Name="fkSamplingTypeId" ColumnName="fkSamplingTypeId" />
+                <ScalarProperty Name="PremiseName" ColumnName="PremiseName" />
+                <ScalarProperty Name="PremiseType" ColumnName="PremiseType" />
+                <ScalarProperty Name="PremiseAddress" ColumnName="PremiseAddress" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactPhoneNumber" ColumnName="ContactPhoneNumber" />
+                <ScalarProperty Name="SamplingDate" ColumnName="SamplingDate" />
+                <ScalarProperty Name="SamplingTime" ColumnName="SamplingTime" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Distributor" ColumnName="Distributor" />
+                <ScalarProperty Name="Importer" ColumnName="Importer" />
+                <ScalarProperty Name="fkSampleOriginId" ColumnName="fkSampleOriginId" />
+                <ScalarProperty Name="fkOriginCountryId" ColumnName="fkOriginCountryId" />
+                <ScalarProperty Name="fkPackagingTypeId" ColumnName="fkPackagingTypeId" />
+                <ScalarProperty Name="PackQuantitySize" ColumnName="PackQuantitySize" />
+                <ScalarProperty Name="BatchLotNumber" ColumnName="BatchLotNumber" />
+                <ScalarProperty Name="ShelfLife" ColumnName="ShelfLife" />
+                <ScalarProperty Name="StorageConditions" ColumnName="StorageConditions" />
+                <ScalarProperty Name="fkLaboratoryId" ColumnName="fkLaboratoryId" />
+                <ScalarProperty Name="SampleQuantity" ColumnName="SampleQuantity" />
+                <ScalarProperty Name="ReceivingDate" ColumnName="ReceivingDate" />
+                <ScalarProperty Name="ReceivingTime" ColumnName="ReceivingTime" />
+                <ScalarProperty Name="AnalysisDate" ColumnName="AnalysisDate" />
+                <ScalarProperty Name="fkContaminantTypeId" ColumnName="fkContaminantTypeId" />
+                <ScalarProperty Name="fkPesticideResidueId" ColumnName="fkPesticideResidueId" />
+                <ScalarProperty Name="fkMycotoxinId" ColumnName="fkMycotoxinId" />
+                <ScalarProperty Name="AnalysisPortion" ColumnName="AnalysisPortion" />
+                <ScalarProperty Name="AnalysisType" ColumnName="AnalysisType" />
+                <ScalarProperty Name="ConFinal" ColumnName="ConFinal" />
+                <ScalarProperty Name="fkConUOM" ColumnName="fkConUOM" />
+                <ScalarProperty Name="LOD" ColumnName="LOD" />
+                <ScalarProperty Name="LOQ" ColumnName="LOQ" />
+                <ScalarProperty Name="Uncertainty" ColumnName="Uncertainty" />
+                <ScalarProperty Name="UncertaintyPercent" ColumnName="UncertaintyPercent" />
+                <ScalarProperty Name="ExtractionMethod" ColumnName="ExtractionMethod" />
+                <ScalarProperty Name="DeterminativeMethod" ColumnName="DeterminativeMethod" />
+                <ScalarProperty Name="ComplianceResult" ColumnName="ComplianceResult" />
+                <ScalarProperty Name="fkCommodityId" ColumnName="fkCommodityId" />
+                <ScalarProperty Name="DispatchDate" ColumnName="DispatchDate" />
+                <ScalarProperty Name="CloseCaseDate" ColumnName="CloseCaseDate" />
+                <ScalarProperty Name="Notes_Designer" ColumnName="Notes_Designer" />
+                <ScalarProperty Name="Notes_Collector" ColumnName="Notes_Collector" />
+                <ScalarProperty Name="Lab_Rejection_Comment" ColumnName="Lab_Rejection_Comment" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Collection_Due_Date" ColumnName="Collection_Due_Date" />
+                <ScalarProperty Name="Collection_Start_Date" ColumnName="Collection_Start_Date" />
+                <ScalarProperty Name="fkSourceTypeId" ColumnName="fkSourceTypeId" />
+                <ScalarProperty Name="SourceName" ColumnName="SourceName" />
+                <ScalarProperty Name="SourceAddress" ColumnName="SourceAddress" />
+                <ScalarProperty Name="SourceContactName" ColumnName="SourceContactName" />
+                <ScalarProperty Name="SourceContactNumber" ColumnName="SourceContactNumber" />
+                <ScalarProperty Name="CollectedQuantity" ColumnName="CollectedQuantity" />
+                <ScalarProperty Name="ViolationType" ColumnName="ViolationType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mycotoxins">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.Mycotoxin">
+              <MappingFragment StoreEntitySet="Mycotoxin">
+                <ScalarProperty Name="pkMycotoxinId" ColumnName="pkMycotoxinId" />
+                <ScalarProperty Name="MycotoxinName" ColumnName="MycotoxinName" />
+                <ScalarProperty Name="PTWI" ColumnName="PTWI" />
+                <ScalarProperty Name="PTWI_unit" ColumnName="PTWI_unit" />
+                <ScalarProperty Name="PTWI_ref" ColumnName="PTWI_ref" />
+                <ScalarProperty Name="cancer_potency" ColumnName="cancer_potency" />
+                <ScalarProperty Name="cp_unit" ColumnName="cp_unit" />
+                <ScalarProperty Name="cp_ref" ColumnName="cp_ref" />
+                <ScalarProperty Name="BMDL10" ColumnName="BMDL10" />
+                <ScalarProperty Name="BMDL10_uni" ColumnName="BMDL10_uni" />
+                <ScalarProperty Name="BMDL10_ref" ColumnName="BMDL10_ref" />
+                <ScalarProperty Name="PMTDI" ColumnName="PMTDI" />
+                <ScalarProperty Name="PMTDI_unit" ColumnName="PMTDI_unit" />
+                <ScalarProperty Name="PMTDI_ref" ColumnName="PMTDI_ref" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MycotoxinMLs">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.MycotoxinML">
+              <MappingFragment StoreEntitySet="MycotoxinML">
+                <ScalarProperty Name="pkMycotoxinMLId" ColumnName="pkMycotoxinMLId" />
+                <ScalarProperty Name="fkMycotoxinId" ColumnName="fkMycotoxinId" />
+                <ScalarProperty Name="ML" ColumnName="ML" />
+                <ScalarProperty Name="fkUOMId" ColumnName="fkUOMId" />
+                <ScalarProperty Name="fkCommodityId" ColumnName="fkCommodityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackagingTypes">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.PackagingType">
+              <MappingFragment StoreEntitySet="PackagingType">
+                <ScalarProperty Name="pkPackagingTypeId" ColumnName="pkPackagingTypeId" />
+                <ScalarProperty Name="PackagingTypeCode" ColumnName="PackagingTypeCode" />
+                <ScalarProperty Name="PackagingTypeText" ColumnName="PackagingTypeText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PesticideResidues">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.PesticideResidue">
+              <MappingFragment StoreEntitySet="PesticideResidue">
+                <ScalarProperty Name="pkPesticideResidueId" ColumnName="pkPesticideResidueId" />
+                <ScalarProperty Name="PestResName" ColumnName="PestResName" />
+                <ScalarProperty Name="PestResCode" ColumnName="PestResCode" />
+                <ScalarProperty Name="ADI" ColumnName="ADI" />
+                <ScalarProperty Name="fkADI_UnitId" ColumnName="fkADI_UnitId" />
+                <ScalarProperty Name="ARFD" ColumnName="ARFD" />
+                <ScalarProperty Name="fkARFD_UnitId" ColumnName="fkARFD_UnitId" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Banned" ColumnName="Banned" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PestResMRLs">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.PestResMRL">
+              <MappingFragment StoreEntitySet="PestResMRL">
+                <ScalarProperty Name="pkPestResMRLId" ColumnName="pkPestResMRLId" />
+                <ScalarProperty Name="fkPesticideResidueId" ColumnName="fkPesticideResidueId" />
+                <ScalarProperty Name="MRL" ColumnName="MRL" />
+                <ScalarProperty Name="fkUOMId" ColumnName="fkUOMId" />
+                <ScalarProperty Name="fkCommodityId" ColumnName="fkCommodityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SampleOrigins">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.SampleOrigin">
+              <MappingFragment StoreEntitySet="SampleOrigin">
+                <ScalarProperty Name="pkSampleOriginId" ColumnName="pkSampleOriginId" />
+                <ScalarProperty Name="OriginCode" ColumnName="OriginCode" />
+                <ScalarProperty Name="OriginText" ColumnName="OriginText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SamplingPlans">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.SamplingPlan">
+              <MappingFragment StoreEntitySet="SamplingPlan">
+                <ScalarProperty Name="pkSamplingPlanId" ColumnName="pkSamplingPlanId" />
+                <ScalarProperty Name="SamplingPlanCode" ColumnName="SamplingPlanCode" />
+                <ScalarProperty Name="SamplingPlanDesc" ColumnName="SamplingPlanDesc" />
+                <ScalarProperty Name="ShortCode" ColumnName="ShortCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SamplingReasons">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.SamplingReason">
+              <MappingFragment StoreEntitySet="SamplingReason">
+                <ScalarProperty Name="pkSamplingReasonId" ColumnName="pkSamplingReasonId" />
+                <ScalarProperty Name="SamplingReasonCode" ColumnName="SamplingReasonCode" />
+                <ScalarProperty Name="SamplingReasonText" ColumnName="SamplingReasonText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SamplingTypes">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.SamplingType">
+              <MappingFragment StoreEntitySet="SamplingType">
+                <ScalarProperty Name="pkSamplingTypeId" ColumnName="pkSamplingTypeId" />
+                <ScalarProperty Name="SamplingTypeCode" ColumnName="SamplingTypeCode" />
+                <ScalarProperty Name="SamplingTypeText" ColumnName="SamplingTypeText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SourceTypes">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.SourceType">
+              <MappingFragment StoreEntitySet="SourceType">
+                <ScalarProperty Name="pkSourceTypeId" ColumnName="pkSourceTypeId" />
+                <ScalarProperty Name="SourceTypeText" ColumnName="SourceTypeText" />
+                <ScalarProperty Name="SourceTypeCode" ColumnName="SourceTypeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestClassifications">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.TestClassification">
+              <MappingFragment StoreEntitySet="TestClassification">
+                <ScalarProperty Name="pkTestClassId" ColumnName="pkTestClassId" />
+                <ScalarProperty Name="TestClass" ColumnName="TestClass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UOMs">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.UOM">
+              <MappingFragment StoreEntitySet="UOM">
+                <ScalarProperty Name="pkUOMId" ColumnName="pkUOMId" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VeterinaryResidues">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.VeterinaryResidue">
+              <MappingFragment StoreEntitySet="VeterinaryResidue">
+                <ScalarProperty Name="pkVeterinaryResidueId" ColumnName="pkVeterinaryResidueId" />
+                <ScalarProperty Name="VetResidueName" ColumnName="VetResidueName" />
+                <ScalarProperty Name="AntibioticsClass" ColumnName="AntibioticsClass" />
+                <ScalarProperty Name="VetResidueCode" ColumnName="VetResidueCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VetResMRLs">
+            <EntityTypeMapping TypeName="FoodSafetyDBModel.VetResMRL">
+              <MappingFragment StoreEntitySet="VetResMRL">
+                <ScalarProperty Name="pkVetResMRLId" ColumnName="pkVetResMRLId" />
+                <ScalarProperty Name="fkVetResidueID" ColumnName="fkVetResidueID" />
+                <ScalarProperty Name="MRL" ColumnName="MRL" />
+                <ScalarProperty Name="fkUOMId" ColumnName="fkUOMId" />
+                <ScalarProperty Name="fkCommodityId" ColumnName="fkCommodityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetGeneratedSamples" FunctionName="FoodSafetyDBModel.Store.GetGeneratedSamples">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FoodSafetyDBModel.GetGeneratedSamples_Result">
+                <ScalarProperty Name="pkLabSampleId" ColumnName="pkLabSampleId" />
+                <ScalarProperty Name="SampleNb" ColumnName="SampleNb" />
+                <ScalarProperty Name="LabSampleNb" ColumnName="LabSampleNb" />
+                <ScalarProperty Name="OfficerName" ColumnName="OfficerName" />
+                <ScalarProperty Name="OfficerPhoneNb" ColumnName="OfficerPhoneNb" />
+                <ScalarProperty Name="fkGovernorateId" ColumnName="fkGovernorateId" />
+                <ScalarProperty Name="fkCazaId" ColumnName="fkCazaId" />
+                <ScalarProperty Name="SamplingPlan" ColumnName="SamplingPlan" />
+                <ScalarProperty Name="SampleCode" ColumnName="SampleCode" />
+                <ScalarProperty Name="fkCommodityStateId" ColumnName="fkCommodityStateId" />
+                <ScalarProperty Name="fkSamplingReasonId" ColumnName="fkSamplingReasonId" />
+                <ScalarProperty Name="fkSamplingTypeId" ColumnName="fkSamplingTypeId" />
+                <ScalarProperty Name="PremiseName" ColumnName="PremiseName" />
+                <ScalarProperty Name="PremiseType" ColumnName="PremiseType" />
+                <ScalarProperty Name="PremiseAddress" ColumnName="PremiseAddress" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactPhoneNumber" ColumnName="ContactPhoneNumber" />
+                <ScalarProperty Name="SamplingDate" ColumnName="SamplingDate" />
+                <ScalarProperty Name="SamplingTime" ColumnName="SamplingTime" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Distributor" ColumnName="Distributor" />
+                <ScalarProperty Name="Importer" ColumnName="Importer" />
+                <ScalarProperty Name="fkSampleOriginId" ColumnName="fkSampleOriginId" />
+                <ScalarProperty Name="fkOriginCountryId" ColumnName="fkOriginCountryId" />
+                <ScalarProperty Name="fkPackagingTypeId" ColumnName="fkPackagingTypeId" />
+                <ScalarProperty Name="PackQuantitySize" ColumnName="PackQuantitySize" />
+                <ScalarProperty Name="BatchLotNumber" ColumnName="BatchLotNumber" />
+                <ScalarProperty Name="ShelfLife" ColumnName="ShelfLife" />
+                <ScalarProperty Name="StorageConditions" ColumnName="StorageConditions" />
+                <ScalarProperty Name="fkLaboratoryId" ColumnName="fkLaboratoryId" />
+                <ScalarProperty Name="SampleQuantity" ColumnName="SampleQuantity" />
+                <ScalarProperty Name="ReceivingDate" ColumnName="ReceivingDate" />
+                <ScalarProperty Name="ReceivingTime" ColumnName="ReceivingTime" />
+                <ScalarProperty Name="AnalysisDate" ColumnName="AnalysisDate" />
+                <ScalarProperty Name="fkContaminantTypeId" ColumnName="fkContaminantTypeId" />
+                <ScalarProperty Name="fkPesticideResidueId" ColumnName="fkPesticideResidueId" />
+                <ScalarProperty Name="fkMycotoxinId" ColumnName="fkMycotoxinId" />
+                <ScalarProperty Name="AnalysisPortion" ColumnName="AnalysisPortion" />
+                <ScalarProperty Name="AnalysisType" ColumnName="AnalysisType" />
+                <ScalarProperty Name="ConFinal" ColumnName="ConFinal" />
+                <ScalarProperty Name="fkConUOM" ColumnName="fkConUOM" />
+                <ScalarProperty Name="LOD" ColumnName="LOD" />
+                <ScalarProperty Name="LOQ" ColumnName="LOQ" />
+                <ScalarProperty Name="Uncertainty" ColumnName="Uncertainty" />
+                <ScalarProperty Name="UncertaintyPercent" ColumnName="UncertaintyPercent" />
+                <ScalarProperty Name="ExtractionMethod" ColumnName="ExtractionMethod" />
+                <ScalarProperty Name="DeterminativeMethod" ColumnName="DeterminativeMethod" />
+                <ScalarProperty Name="ComplianceResult" ColumnName="ComplianceResult" />
+                <ScalarProperty Name="fkCommodityId" ColumnName="fkCommodityId" />
+                <ScalarProperty Name="DispatchDate" ColumnName="DispatchDate" />
+                <ScalarProperty Name="CloseCaseDate" ColumnName="CloseCaseDate" />
+                <ScalarProperty Name="Notes_Designer" ColumnName="Notes_Designer" />
+                <ScalarProperty Name="Notes_Collector" ColumnName="Notes_Collector" />
+                <ScalarProperty Name="Lab_Rejection_Comment" ColumnName="Lab_Rejection_Comment" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Collection_Due_Date" ColumnName="Collection_Due_Date" />
+                <ScalarProperty Name="Collection_Start_Date" ColumnName="Collection_Start_Date" />
+                <ScalarProperty Name="fkSourceTypeId" ColumnName="fkSourceTypeId" />
+                <ScalarProperty Name="SourceName" ColumnName="SourceName" />
+                <ScalarProperty Name="SourceAddress" ColumnName="SourceAddress" />
+                <ScalarProperty Name="SourceContactName" ColumnName="SourceContactName" />
+                <ScalarProperty Name="SourceContactNumber" ColumnName="SourceContactNumber" />
+                <ScalarProperty Name="CollectedQuantity" ColumnName="CollectedQuantity" />
+                <ScalarProperty Name="ViolationType" ColumnName="ViolationType" />
+                <ScalarProperty Name="pkCollectionDesignId" ColumnName="pkCollectionDesignId" />
+                <ScalarProperty Name="fkLabSampleId" ColumnName="fkLabSampleId" />
+                <ScalarProperty Name="fkDesignerId" ColumnName="fkDesignerId" />
+                <ScalarProperty Name="GeneratedDate" ColumnName="GeneratedDate" />
+                <ScalarProperty Name="fkCollectorId" ColumnName="fkCollectorId" />
+                <ScalarProperty Name="pkLaboratoryId" ColumnName="pkLaboratoryId" />
+                <ScalarProperty Name="LaboratoryName" ColumnName="LaboratoryName" />
+                <ScalarProperty Name="LaboratoryCode" ColumnName="LaboratoryCode" />
+                <ScalarProperty Name="LabPhoneNumber" ColumnName="LabPhoneNumber" />
+                <ScalarProperty Name="LabEmail" ColumnName="LabEmail" />
+                <ScalarProperty Name="LabAddress" ColumnName="LabAddress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getLabSamplesBetweenDates" FunctionName="FoodSafetyDBModel.Store.getLabSamplesBetweenDates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FoodSafetyDBModel.getLabSamplesBetweenDates_Result">
+                <ScalarProperty Name="SampleNb" ColumnName="SampleNb" />
+                <ScalarProperty Name="AnalysisDate" ColumnName="AnalysisDate" />
+                <ScalarProperty Name="AnalysisPortion" ColumnName="AnalysisPortion" />
+                <ScalarProperty Name="AnalysisType" ColumnName="AnalysisType" />
+                <ScalarProperty Name="ConFinal" ColumnName="ConFinal" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="DeterminativeMethod" ColumnName="DeterminativeMethod" />
+                <ScalarProperty Name="ExtractionMethod" ColumnName="ExtractionMethod" />
+                <ScalarProperty Name="PestResName" ColumnName="PestResName" />
+                <ScalarProperty Name="MycotoxinName" ColumnName="MycotoxinName" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="GovernorateName" ColumnName="GovernorateName" />
+                <ScalarProperty Name="CommodityDescription" ColumnName="CommodityDescription" />
+                <ScalarProperty Name="Uncertainty" ColumnName="Uncertainty" />
+                <ScalarProperty Name="UncertaintyPercent" ColumnName="UncertaintyPercent" />
+                <ScalarProperty Name="SamplingDate" ColumnName="SamplingDate" />
+                <ScalarProperty Name="LOD" ColumnName="LOD" />
+                <ScalarProperty Name="LOQ" ColumnName="LOQ" />
+                <ScalarProperty Name="SamplingPlan" ColumnName="SamplingPlan" />
+                <ScalarProperty Name="PremiseName" ColumnName="PremiseName" />
+                <ScalarProperty Name="PackQuantitySize" ColumnName="PackQuantitySize" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getSamplesBetweenDates" FunctionName="FoodSafetyDBModel.Store.getSamplesBetweenDates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FoodSafetyDBModel.getSamplesBetweenDates_Result">
+                <ScalarProperty Name="SampleNb" ColumnName="SampleNb" />
+                <ScalarProperty Name="AnalysisDate" ColumnName="AnalysisDate" />
+                <ScalarProperty Name="AnalysisPortion" ColumnName="AnalysisPortion" />
+                <ScalarProperty Name="AnalysisType" ColumnName="AnalysisType" />
+                <ScalarProperty Name="ConFinal" ColumnName="ConFinal" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="DeterminativeMethod" ColumnName="DeterminativeMethod" />
+                <ScalarProperty Name="ExtractionMethod" ColumnName="ExtractionMethod" />
+                <ScalarProperty Name="PestResName" ColumnName="PestResName" />
+                <ScalarProperty Name="MycotoxinName" ColumnName="MycotoxinName" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="GovernorateName" ColumnName="GovernorateName" />
+                <ScalarProperty Name="CommodityDescription" ColumnName="CommodityDescription" />
+                <ScalarProperty Name="Uncertainty" ColumnName="Uncertainty" />
+                <ScalarProperty Name="UncertaintyPercent" ColumnName="UncertaintyPercent" />
+                <ScalarProperty Name="SamplingDate" ColumnName="SamplingDate" />
+                <ScalarProperty Name="LOD" ColumnName="LOD" />
+                <ScalarProperty Name="LOQ" ColumnName="LOQ" />
+                <ScalarProperty Name="SamplingPlan" ColumnName="SamplingPlan" />
+                <ScalarProperty Name="PremiseName" ColumnName="PremiseName" />
+                <ScalarProperty Name="PackQuantitySize" ColumnName="PackQuantitySize" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="FoodSafetyDBModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="FoodSafetyDBModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="FoodSafetyDBModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="FoodSafetyDBModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FoodSafetyDBModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="FoodSafetyDBModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FoodSafetyDBModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FoodSafetyDBModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FoodSafetyDBModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Contaminants_Monitoring.ViewModels.LabTestViewModel>
+@{
+    ViewBag.Title = "TestsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/Content/DataTables/css/dataTables.jqueryui.css" rel="stylesheet" />
+<h3 style="padding-top: 20px; color: dimgray;">Lab Tests</h3>
+
+<hr />
+@*<div class="row">
+    <div class="col-md-12">
+        @{
+            var sample = Model.First().labSample;
+        }
+
+        @if (sample != null)
+        {
+            <p>Information of Sample @sample.SampleNb</p>
+        }
+    </div>
+</div>*@
+<div class="row">
+    <div class="col-md-12">
+        <table id="testsTableId" class="table table-responsive table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Pesticide Residue/ Mycotoxin</th>
+                    <th>Analysis Date</th>
+                    <th>Analysis Portion</th>
+                    <th>Analysis Type</th>
+                    <th>Final Concentration</th>
+                    <th>UOM</th>
+                    <th>Validation Type</th>
+                    <th>LOD</th>
+                    <th>LOQ</th>
+                    <th>Uncertainty Percent</th>
+                    <th>Lab Comment</th>
+                    <th>Extraction Method</th>
+                    <th>Determinative Method</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model is null)
+                {
+                    <tr><td><p>No records</p></td></tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            @{
+                                var unit = "";
+                            }
+                            <td>
+                                @if (item.labSample.PesticideResidue != null)
+                                {
+                                    unit = " mg/kg";
+                                    @Html.DisplayFor(modelItem => item.labSample.PesticideResidue.PestResName)
+                                }
+                                @if (item.labSample.Mycotoxin != null)
+                                {
+                                    unit = " ppb";
+                                    @Html.DisplayFor(modelItem => item.labSample.Mycotoxin.MycotoxinName)
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.AnalysisDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.AnalysisPortion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.AnalysisType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.ConFinal)
+                            </td>
+                            <td>
+                                @unit
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.ViolationType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.LOD)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.LOQ)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.UncertaintyPercent)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.Lab_Rejection_Comment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.ExtractionMethod)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.labSample.DeterminativeMethod)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#testsTableId").DataTable({
+                scrollX: true
+            });
+        });
+    </script>
+</div>
+

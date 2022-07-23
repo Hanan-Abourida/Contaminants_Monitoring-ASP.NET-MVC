@@ -1,0 +1,328 @@
+﻿@model  Contaminants_Monitoring.ViewModels.SearchViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Scripts/chosen/chosen.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+<link href="~/Content/DataTables/css/buttons.jqueryui.css" rel="stylesheet" />
+<link href="~/Content/DataTables/css/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Content/DataTables/css/buttons.bootstrap.min.css" rel="stylesheet" />
+
+@*<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+
+
+
+<h3 style="padding-top: 20px; color: dimgray;">Monitoring Data Output</h3>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <p style="margin-bottom:0px !important">
+            <a class="btn btn-default" onclick="collapseSearchPanel()" data-bs-toggle="searchCollapse"
+               data-bs-target="searchCollapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="font-size: 13px !important;">
+                <i class="fa fa-filter"></i>
+                Filter Options
+            </a>
+        </p>
+        <div class="show searchCollapse" id="collapseExample">
+            <div class="card card-body border-0" style=" padding-top: 0.2rem;">
+                @using (Html.BeginForm("Search", "Output"))
+                {
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card" style="padding-left:0.1rem !important;box-shadow: 0px 2px 3px 0px lightgray">
+                                <div class="card-body" style="padding: 0.6em;padding-bottom: 0.1em;">
+                                    <div class="form-check-inline">
+                                        @Html.RadioButtonFor(m => m.searchType, "PlanOption", new { @class = "form-check-inline", id = "planRadio", @checked = "checked" })
+                                        <label style="margin-bottom: 0 !important;font-size: 0.8em;color: grey;" for="planRadio"> Search by Monitoring Plan </label>
+                                    </div> 
+                                    @*<h5 class="card-title">Search by Monitoring Plan</h5>*@
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                @*@Html.Label("Specify Monitoring Plan: ", new { @class = "control-label col-md-4" })*@
+                                                <div>
+                                                    @Html.DropDownListFor(m => m.fkMonitoringPlanId, new SelectList(Model.monitoringPlans, "pkSamplingPlanId", "SamplingPlanCode"), "select", new { @class = "form-control", id = "PlanChosenId" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card" style="padding-left:0.1rem !important;box-shadow: 0px 2px 3px 0px lightgray">
+                                <div class="card-body" style="padding: 0.6em;padding-bottom: 0.1em;">
+                                    <div class="form-check-inline">
+                                        @Html.RadioButtonFor(m => m.searchType, "Options", new { @class = "form-check-inline", id = "optionsRadio" })
+                                        <label style="margin-bottom: 0 !important;font-size: 0.8em;color:grey;" for="optionsRadio"> Search by options </label>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            @Html.Label("Commodity", new { @class = "control-label searchLabel" })
+                                            <div class="" style="" id="specificCommDivId">
+                                                @Html.ListBoxFor(s => s.selectedCommodities, new SelectList(Model.commoditiesItems, "Value", "Text"), new { @class = "form-control", id = "commoditiesChosenId", Multiple = "multiple" })
+                                            </div>
+
+                                            @*<div class="form-check" style="display:inline-block !important;">
+                @Html.CheckBoxFor(m => m.allCommodities, new { @class = "control-label form-check-input", id = "CheckCommId" })
+                <label class="form-check-label searchLabel" for="CheckCommId">
+                    All Commodities
+                </label>
+            </div>*@
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            @Html.Label("Year", new { @class = "control-label searchLabel" })
+                                            <div>
+                                                @Html.ListBoxFor(s => s.selectedYears, new SelectList(Model.years, "Value", "Text"), new { @class = "form-control", id = "yearsChosenId", Multiple = "multiple" })
+                                            </div>
+                                            @*<div class="form-check" style="display:inline-block !important;">
+                @Html.CheckBoxFor(m => m.allYears, new { @class = "control-label form-check-input", id = "CheckyearsId" })
+                <label class="form-check-label searchLabel" for="CheckyearsId">
+                    All Years
+                </label>
+            </div>*@
+                                        </div>
+                                       
+
+                                    </div>
+
+                                   
+
+                                    <div class="row">
+
+                                        <div class="form-group col-md-6">
+                                            @Html.Label("Contaminant", new { @class = "control-label searchLabel" })
+                                            <div>
+                                                @Html.DropDownListFor(m => m.fkContaminantTypeId, new SelectList(Model.contaminantTypes, "pkContaminantTypeId", "ContaminantName"), "select", new { @class = "form-control", id = "ContaminantChosenId" })
+                                            </div>
+                                        </div>
+
+                                        @*<div class="form-group col-md-6">
+            @Html.Label("Contaminant Organisms", new { @class = "control-label searchLabel" })
+            <div>
+                @Html.ListBoxFor(s => s.selectedContOrganisms, new SelectList(Model.ConOrganismsItems, "Value", "Text"), new { @class = "form-control", id = "organismsChosenId", Multiple = "multiple" })
+            </div>
+        </div>*@
+
+                                        <div class="form-group col-md-6">
+                                            @Html.Label("Contaminant Organisms", new { @class = "control-label searchLabel" })
+                                            <div id="divForPesResiduesId">
+                                                @Html.ListBoxFor(s => s.selectedPesticideResidues, new SelectList(Model.pesticideResiduesItems, "Value", "Text"), new { @class = "form-control", id = "pesticidesChosenId", Multiple = "multiple" })
+                                            </div>
+                                            <div id="divForMycotoxinsId">
+                                                @Html.ListBoxFor(s => s.selectedMycotoxins, new SelectList(Model.myCotoxinsItems, "Value", "Text"), new { @class = "form-control", id = "mycotoxinsChosenId", Multiple = "multiple" })
+                                            </div>
+                                            @*<div class="form-check" style="display:inline-block !important;">
+                @Html.CheckBoxFor(m => m.allPesticidesResidues, new { @class = "control-label form-check-input", id = "CheckPRId" })
+                <label class="form-check-label searchLabel" for="CheckPRId">
+                    All Pesticide Residues
+                </label>
+            </div>*@
+
+                                            @*  <div class="form-group col-md-6" style="display:none">
+                                            @Html.Label("Mycotoxin", new { @class = "control-label searchLabel" })
+                                            <div >
+                                                @Html.ListBoxFor(s => s.selectedMycotoxins, new SelectList(Model.myCotoxinsItems, "Value", "Text"), new { @class = "form-control", id = "mycotoxinsChosenId", Multiple = "multiple" })
+                                            </div>
+                                           <div class="form-check" style="display:inline-block !important;">
+                @Html.CheckBoxFor(m => m.allMycotoxins, new { @class = "control-label form-check-input", id = "CheckMycotoxinId" })
+                <label class="form-check-label searchLabel" for="CheckMycotoxinId">
+                    All Mycotoxins
+                </label>
+            </div>*@
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.Label("Preference: ", new { @class = "control-label col-md-2 searchLabel" })
+                            <div class="form-check-inline">
+                                @Html.RadioButtonFor(m => m.violateResultType, "ALL", new { @class = "form-check-input", id = "RadioDefault1", @checked = "checked" })
+                                <label class="form-check-label searchLabel" for="RadioDefault1"> All results</label>
+                            </div>
+                            <div class="form-check-inline">
+                                @Html.RadioButtonFor(m => m.violateResultType, "DET", new { @class = "form-check-input", name = "flexRadioDefault", id = "RadioDefault2" })
+                                <label class="form-check-label searchLabel" for="RadioDefault2"> Positive detects only</label>
+                            </div>
+                            <div class="form-check-inline">
+                                @Html.RadioButtonFor(m => m.violateResultType, "VIO", new { @class = "form-check-input", name = "flexRadioDefault", id = "RadioDefault3" })
+                                <label class="form-check-label searchLabel" for="RadioDefault3"> Violative detects only</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Separate data by: ", new { @class = "control-label col-md-2 searchLabel" })
+                            <div class="form-check-inline">
+                                @Html.RadioButtonFor(m => m.separationVariable, "none", new { @class = "form-check-input", name = "sepRadioDefault", id = "RadioSep4", @checked = "checked" })
+                                <label class="form-check-label searchLabel" for="RadioSep4"> Don't separate</label>
+                            </div>
+                            <div class="form-check-inline">
+                                @Html.RadioButtonFor(m => m.separationVariable, "gov", new { @class = "form-check-input", id = "RadioSep1" })
+                                <label class="form-check-label searchLabel" for="RadioSep1"> Governorate</label>
+                            </div>
+                            <div class="form-check-inline">
+                                @Html.RadioButtonFor(m => m.separationVariable, "org", new { @class = "form-check-input", name = "sepRadioDefault", id = "RadioSep2" })
+                                <label class="form-check-label searchLabel" for="RadioSep2"> Origin of sample</label>
+                            </div>
+                            <div class="form-check-inline">
+                                @Html.RadioButtonFor(m => m.separationVariable, "prem", new { @class = "form-check-input", name = "sepRadioDefault", id = "RadioSep3" })
+                                <label class="form-check-label searchLabel" for="RadioSep3"> Premise type</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="form-horizontal" style="margin-left: 13rem;">
+                        @Html.CheckBoxFor(m => m.showSummary, new { @class = "control-label form-check-input", id = "CheckSummaryId" })
+                        <label class="form-check-label searchLabel" for="CheckSummaryId">
+                            Show a summary of contaminant/ residue findings.
+                        </label>
+                    </div>
+                    <div class="form-horizontal" style="margin-left: 13rem;">
+                        @Html.CheckBoxFor(m => m.showDetailedFindings, new { @class = "control-label form-check-input", id = "CheckDetId" })
+                        <label class="form-check-label searchLabel" for="CheckDetId">
+                            Show detailed findings.
+                        </label>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary btn-sm" value="Find" type="submit" style="width:110px; float:right;"
+                                data-bs-toggle="searchCollapse" id="btnFindId"
+                                data-bs-target="searchCollapse" href="#collapseExample">
+                            <i class="fa fa-search"></i> Find
+                        </button>
+                    </div>
+                }
+            </div>
+            </div>
+        </div>
+</div>
+<script>
+
+    function collapseSearchPanel() {
+        $(".searchCollapse").toggle();
+    }
+
+    function closeSearchPanel() {
+        //must be called onclick for btn but during ajax
+        $(".searchCollapse").fadeOut();
+    }
+
+</script>
+<br />
+@if (Model.separationVariable == null)
+{
+    <p class="alert-light">Click Find to display data</p>
+}
+else if (Model.separationVariable == "none")
+{
+    @Html.Partial("Result_NoGroup", new ViewDataDictionary { { "ModelParam", Model } });
+}
+else if (Model.separationVariable == "gov")
+{
+    @Html.Partial("Result_GroupByGov", new ViewDataDictionary { { "ModelParam", Model } });
+}
+else if (Model.separationVariable == "prem")
+{
+    @Html.Partial("Result_GroupByPremise", new ViewDataDictionary { { "ModelParam", Model } });
+}
+else if (Model.separationVariable == "org")
+{
+    @Html.Partial("Result_GroupByOrigin", new ViewDataDictionary { { "ModelParam", Model } });
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+    </div>
+</div>
+
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/DataTables/dataTables.buttons.min.js"></script>
+<script src="~/Scripts/DataTables/buttons.bootstrap.min.js"></script>
+<script>
+        $(function () {
+            $("#ContaminantChosenId").change(function () {
+            $(this).className = '';
+             var t = $(this).val();
+                if (t !== "") {
+                    if (t == '1') {
+                        //Pesticide residue
+                        $('#divForPesResiduesId').show();
+                        $('#divForMycotoxinsId').hide();
+                    }
+                    else if (t == '2') {
+                        //Mycotoxin
+                        $('#divForPesResiduesId').hide();
+                        $('#divForMycotoxinsId').show();
+                    }
+            } 
+
+     });
+        });
+
+
+    $(function () {
+        $("#commoditiesChosenId").chosen({ width: "100%" });
+        $("#ContaminantChosenId").chosen({ width: "100%" });
+        $("#PlanChosenId").chosen({ width: "50%" });
+        $("#pesticidesChosenId").chosen({ width: "100%" });
+        $("#pesticidesChosenId").chosen({ width: "100%" });
+        $("#mycotoxinsChosenId").chosen({ width: "100%" });
+        $("#yearsChosenId").chosen({ width: "100%" })
+
+    })
+
+    //     $('#btnFindId').add('click',function() {
+    //     $(".searchCollapse").fadeToggle();
+    //}, false);
+
+    $(document).ready(function () {
+        $(".statDataTable").DataTable(
+            {
+                "ordering": false
+            }
+        );
+        $('#divForPesResiduesId').show();
+        $('#divForMycotoxinsId').hide();
+    });
+
+
+
+//        $(document).ready(function() {
+//   $("#tableDivId").hide();
+//});
+
+//    $(document).ready(function() {
+//    $("#CheckCommId").click(function() {
+//        alert("setCompleteStatus called");
+//        if (this.checked) {
+//            var nodes = document.getElementById("specificCommDivId").getElementsByTagName('*');
+//            for(var i = 0; i < nodes.length; i++){
+//                nodes[i].disabled = true;
+//            }
+//         }
+//         //$("#specificCommDivId").children().prop('disabled',true);
+//         // $("#specificCommDivId").attr('disabled', 'disabled');
+//        else
+//         $("#specificCommDivId").children().prop('disabled',false);
+//    });
+//});
+
+</script>
+

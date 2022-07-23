@@ -1,0 +1,417 @@
+﻿@model Contaminants_Monitoring.Models.LabSample
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LabSample</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SampleNb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SampleNb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LabSampleNb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabSampleNb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfficerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfficerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfficerPhoneNb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfficerPhoneNb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SamplingPlan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SamplingPlan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SampleCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SampleCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PremiseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PremiseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PremiseType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PremiseType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PremiseAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PremiseAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SamplingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SamplingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SamplingTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SamplingTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrandName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manufacturer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Distributor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Distributor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Importer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Importer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PackQuantitySize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PackQuantitySize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchLotNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchLotNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShelfLife)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShelfLife)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StorageConditions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StorageConditions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SampleQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SampleQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceivingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceivingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceivingTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceivingTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnalysisDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnalysisDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnalysisPortion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnalysisPortion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnalysisType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnalysisType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConFinal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConFinal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fkConUOM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fkConUOM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LOD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LOQ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOQ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Uncertainty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Uncertainty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UncertaintyPercent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UncertaintyPercent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExtractionMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExtractionMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeterminativeMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeterminativeMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ViolationType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ViolationType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Caza.CazaCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Caza.CazaCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commodity.CommodityCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commodity.CommodityCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommodityState.CommodityDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommodityState.CommodityDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContaminantType.ContaminantName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContaminantType.ContaminantName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.CountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.CountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Governorate.GovernorateCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Governorate.GovernorateCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laboratory.LaboratoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laboratory.LaboratoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mycotoxin.MycotoxinName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mycotoxin.MycotoxinName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PackagingType.PackagingTypeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PackagingType.PackagingTypeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PesticideResidue.PestResName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PesticideResidue.PestResName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SamplingReason.SamplingReasonCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SamplingReason.SamplingReasonCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SamplingType.SamplingTypeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SamplingType.SamplingTypeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SampleOrigin.OriginCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SampleOrigin.OriginCode)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

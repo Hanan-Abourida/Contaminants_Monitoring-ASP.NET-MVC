@@ -1,0 +1,83 @@
+﻿@model Contaminants_Monitoring.ViewModels.GovCazaModelView
+
+@{
+    ViewBag.Title = "Governorates and Cazas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" target="_self">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Library</li>
+        <li class="breadcrumb-item active" aria-current="page">Governorates and Cazas</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Governorates</h3>
+
+<hr />
+@*<p>
+    @Html.ActionLink("Add New", "Create")
+</p>*@
+<table class="table table-responsive table-hover" style="display:table">
+    <tr style="background-color: #346cb0 !important;color: white;">
+        <th>
+            @Html.DisplayName("Governorate Name")
+        </th>
+        <th>
+            @Html.DisplayName("Governorate Code")
+        </th>
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model.governorates)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GovernorateName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GovernorateCode)
+            </td>
+            @*<td>
+                @Html.ActionLink("Edit", "EditGovernorate", new { id = item.pkGovernorateId }) |
+                @Html.ActionLink("Delete", "DeleteGovernorate", new { id = item.pkGovernorateId })
+            </td>*@
+        </tr>
+    }
+
+</table>
+
+<h3 style="padding-top: 20px; color: dimgray;">Cazas</h3>
+
+<hr />
+@*<p>
+    @Html.ActionLink("Add New", "Create")
+</p>*@
+<table class="table table-responsive table-hover" style="display:table">
+    <tr style="background-color: #346cb0 !important;color: white;">
+        <th>
+            @Html.DisplayName("Caza Name")
+        </th>
+        <th>
+            @Html.DisplayName("Caza Code")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.cazas)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.CazaName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CazaCode)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "EditCaza", new { id = item.pkCazaId }) |
+        @Html.ActionLink("Delete", "DeleteCaza", new { id = item.pkCazaId })
+    </td>
+</tr>
+    }
+
+</table>
+

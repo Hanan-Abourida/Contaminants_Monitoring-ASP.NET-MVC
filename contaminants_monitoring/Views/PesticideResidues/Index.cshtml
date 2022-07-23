@@ -1,0 +1,156 @@
+﻿@model IEnumerable<Contaminants_Monitoring.Models.PesticideResidue>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+<style>
+    .dataTables_length, .dataTables_filter {
+        font-size: 13px !important;
+    }
+
+    table.dataTable thead th, table.dataTable thead td {
+        border-bottom: none !important;
+    }
+
+    .residueName {
+        color: darkcyan !important;
+    }
+
+    .bannedStyleRow {
+        background-color: #F55F41 !important;
+        color: lightgray !important;
+    }
+</style>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Library", "Library", "Home")
+        </li>
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Contaminants", "ContaminantsLibrary", "Home")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">List of Pesticide Residues</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">List of Pesticide Residues</h3>
+
+<hr />
+
+<p>
+    @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table table-responsive table-hover" style="display:table;" id="pestsId">
+    <thead>
+        <tr style="background-color: #346cb0;
+color: white;
+white-space: nowrap;">
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PestResCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ADI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UOM.unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ARFD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UOM1.unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Banned)
+            </th>
+
+
+            <th></th>
+        </tr>
+        </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+            var bannedVar = "";
+            if (item.Banned != null && (bool)item.Banned == true)
+            {
+                bannedVar = "bannedStyleRow";
+            }
+
+            <tr>
+                <td style="font-size: large;">
+
+                    @if (item.Banned != null && (bool)item.Banned)
+                    {
+                        <span class="badge badge-danger" style="padding: 0.8em 0.8em 0.8em 0.8em !important;">
+                            @Html.DisplayFor(modelItem => item.PestResName)
+                            @*<i class="fa fa-warning" style="padding-left: 1em;"></i>*@
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-default" style="padding: 0.8em 0.8em 0.8em 0.8em !important;">
+                            @Html.DisplayFor(modelItem => item.PestResName)
+                            @*<i class="fa fa-warning" style="padding-left: 1em;"></i>*@
+                        </span>
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PestResCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ADI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UOM.unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ARFD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UOM1.unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reference)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Banned)
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.pkPesticideResidueId }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.pkPesticideResidueId }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.pkPesticideResidueId })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<br />
+<p class="bg-dark text-light p-2">Total number of pesticide residues: @Model.Count()</p>
+
+<script>
+    $(document).ready(function () {
+        $("#pestsId").DataTable(
+            {
+                "ordering": false,
+            }
+        );
+    });
+</script>

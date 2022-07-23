@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "ContaminantsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" target="_self">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Library</li>
+        <li class="breadcrumb-item active" aria-current="page">Contaminants</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Contaminants Types</h3>
+
+<hr />
+
+<ul class="list-unstyled">
+    <li>
+        @Html.ActionLink("List of All Pesticide Residues", "Index", "PesticideResidues", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+    </li>
+    <li>
+        @Html.ActionLink("List of MRL Values", "PesticidesResidues", "Library", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Mycotoxins ML Values", "MyCotoxins", "Library", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Veterinary Residues", "VeterinaryResidues", "Library", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+    </li>
+</ul>

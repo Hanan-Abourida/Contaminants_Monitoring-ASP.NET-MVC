@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Contaminants Management System</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/jqueryui")
+</head>
+<body>
+    <div class="dateHeader" style="background: #346cb0;height: 40px !important;top: 0px !important;position: absolute;width: 100% !important;">
+        <img src="~/Content/images/lebanon-republic-en_new.png" style="padding-left: 14rem;padding-top: 0.3em;" />
+        <label style="color:white; float: right;padding-right: 10%;padding-top: 0.6em;">
+            @{
+                var today = DateTime.Now.ToString("dddd, dd MMMM yyyy");
+            }
+            @today
+        </label>
+
+    </div>
+
+    <div class="logoHeader" style="height: auto;margin-top: -0.6em; background-color: white;margin-bottom: -0.4em;">
+        @*<img src="~/Content/images/ministry-logo.jpg" style="margin-left: 10rem;vertical-align: baseline;" />*@
+
+        <img src="~/Content/images/moa_landing.png" style="
+        height: 125px;
+        padding-top: 0.7em;
+        padding-bottom: 1em;
+        margin-left: 13em;
+" />
+        <img src="~/Content/images/FAO_logos_3.png" style=" height: 100px; padding-top: 0.6em; padding-bottom: 1em;" />
+
+        @*<img src="~/Content/images/FAO_logos_3.png" style="margin-left: 14em;height: 73px;margin-top: 0.3rem;" />*@
+        @*<img src="~/Content/Images/flag.PNG" style="float: right;height: 85px !important;" />*@
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #346cb0 !important;
+        width: 100% !important;
+        z-index:1; box-shadow: 0px 6px 8px 1px lightgray">
+        <div class="container-fluid">
+            @Html.ActionLink("Food Contaminants Monitoring System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "margin-left:11em;font-size: 17px !important;font-family: -apple-system,BlinkMacSystemFont,Fira Sans,Helvetica Neue,Apple Color Emoji,sans-serif !important;font-weight: bold;" })
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    @*<li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link active" })</li>
+                        <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })</li>*@
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid body-content">
+        <div class="row d-flex">
+            <nav class="col-md-2 collapse show width" id="sidebar">
+                <ul class="list-unstyled">
+                    <li style="padding-top:10px !important">
+                        <a href="#" style="font-weight:bold;color:#346cb0">
+                            <i class="fa fa-home" style="margin-right: .5em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                            <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#346cb0 !important;font-weight: 600;">
+                                Dashboard
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="list-unstyled components" style="margin-bottom:0.4rem !important;">
+                    <li>
+                        <a href="#actsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-list-ol" style="margin-right: .5em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                            <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important">Monitoring Activities</span>
+                        </a>
+                        <ul class="list-unstyled collapse sidebar-submenu" id="actsSubmenu">
+                            <li>
+                                @Html.ActionLink("Codification", "SamplesCreation", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Distribution", "Map", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Collection", "CollectionIndex", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="list-unstyled components" style="margin-bottom:0.4rem !important;">
+                    <li>
+                        <a href="#labSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-flask" style="margin-right: .5em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                            <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important">Laboratory Samples</span>
+                        </a>
+                        <ul class="list-unstyled collapse sidebar-submenu" id="labSubmenu">
+                            <li>
+                                @Html.ActionLink("Import Data", "Import", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Lab Inventory", "Inventory", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+                <ul class="list-unstyled components" style="margin-bottom:0.4rem !important;">
+                    <li>
+                        <a style="display:inline-block">
+                            <i class="fa fa-signal" style="margin-right: .3em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                            <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important">
+                                @Html.ActionLink("Monitoring Output", "Search", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link", style = "display: inline-block;padding-left: 0rem !important;color: black !important;font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important" })
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="list-unstyled components" style="margin-bottom:0.4rem !important;">
+                    <li>
+                        <a style="display:inline-block">
+                            <i class="fa fa-exclamation-triangle" style="margin-right: .3em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                            <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important">
+                                @Html.ActionLink("Risk Assessment Tool", "RiskTool", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link", style = "display: inline-block;padding-left: 0rem !important;color: black !important;font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important" })
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="list-unstyled components" style="margin-bottom:0.4rem !important;">
+                    <li>
+                        <a href="#historySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-history" style="margin-right: .5em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                            <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important">History</span>
+                        </a>
+                        <ul class="list-unstyled collapse sidebar-submenu" id="historySubmenu">
+                            <li>
+                                @Html.ActionLink("Commodity History", "CommodityHistory", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Contaminant History", "ContaminantHistory", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                @*<ul class="list-unstyled components" style="margin-bottom:0.4rem !important;">
+            <li>
+                <a href="#dataSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa fa-list" style="margin-right: .5em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                    <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important">
+                        Consumption Data
+                    </span>
+                </a>
+                <ul class="list-unstyled collapse sidebar-submenu" id="dataSubmenu">
+                    <li><a href="#">Import</a></li>
+                    <li><a href="#">Review</a></li>
+                </ul>
+            </li>
+
+
+        </ul>*@
+                <ul class="list-unstyled components" style="margin-bottom:0.4rem !important;">
+                    <li>
+                        <a href="#libSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-archive" style="margin-right: .5em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                            <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important">
+                                Library
+                            </span>
+                        </a>
+                        <ul class="list-unstyled collapse sidebar-submenu" id="libSubmenu">
+                            <li>
+                                @Html.ActionLink("Sampling Plans", "SamplingPlansList", "Library", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Contaminants", "ContaminantsList", "Library", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Governorates & Cazas", "Gov_Caza", "Library", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+                @*<ul class="list-unstyled components">
+            <li>
+                <a href="#statsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa fa-pie-chart" style="margin-right: .5em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                    <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important">
+                        Statistical Study
+                    </span>
+                </a>
+                <ul class="list-unstyled collapse sidebar-submenu" id="statsSubmenu">
+                    <li><a href="#">Descriptive</a></li>
+                    <li><a href="#">Boxplots</a></li>
+                </ul>
+            </li>
+
+
+        </ul>*@
+                @*<ul class="list-unstyled components" style="margin-bottom:0.4rem !important;">
+            <li>
+                <a href="#rptSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa fa-table" style="margin-right: .5em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                    <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important">
+                        Reports
+                    </span>
+                </a>
+                <ul class="list-unstyled collapse sidebar-submenu" id="rptSubmenu">
+                    <li><a href="#">individuals</a></li>
+                    <li><a href="#">contaminants</a></li>
+                </ul>
+            </li>
+        </ul>*@
+                <ul class="list-unstyled components" style="margin-bottom:0.4rem !important;">
+                    <li>
+                        <a style="display:inline-block">
+                            <i class="fa fa-users" style="margin-right: .3em;font-size: 1.125rem !important;color:#BFBFBF !important"></i>
+                            <span style="font-size:.875rem !important;line-height: 1.25rem !important; color:#222230 !important">
+
+                                @Html.ActionLink("Administration", "UsersWithRoles", "ManageUsers", routeValues: null, htmlAttributes: new { @class = "nav-link", style = "display: inline-block;padding-left: 0rem !important;color: black !important;color: #222230 !important;font-size:.875rem !important;line-height: 1.25rem !important" })
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <main class="col-md-10">
+                @*<h2>I'm the main content</h2>*@
+                @RenderBody()
+            </main>
+        </div>
+        @*@RenderBody()*@
+        <hr />
+        <footer>
+            <p>&copy; 2021 - Lebanese Ministry of Agriculture in collaboration with FAO</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/chosen")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

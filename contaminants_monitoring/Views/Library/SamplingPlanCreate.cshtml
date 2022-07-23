@@ -1,0 +1,62 @@
+﻿@model Contaminants_Monitoring.Models.SamplingPlan
+
+@{
+    ViewBag.Title = "SamplingPlanCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" target="_self">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Library</li>
+        <li class="breadcrumb-item active" aria-current="page">Sampling Plans</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Sampling Plan Create Form</h3>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-success" />
+            @Html.ActionLink("Back to List", "SamplingPlansList", null, new { @class = "btn btn-outline-success" })
+        </div>
+    </div>
+    <br/>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Code", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SamplingPlanCode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SamplingPlanCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SamplingPlanDesc, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SamplingPlanDesc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Incremental Code", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.ShortCode, new { htmlAttributes = new { @class = "form-control disabled" } })
+            @Html.ValidationMessageFor(model => model.ShortCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+</div>
+}
+
+<div>
+ 
+</div>

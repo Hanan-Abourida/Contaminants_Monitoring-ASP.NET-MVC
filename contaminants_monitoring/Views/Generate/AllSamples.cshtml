@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Contaminants_Monitoring.ViewModels.SampleStatusViewModel>
+@{
+    ViewBag.Title = "AllSamples";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/umd/popper.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/Content/DataTables/css/dataTables.jqueryui.css" rel="stylesheet" />
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Generated Samples</li>
+    </ol>
+</nav>
+
+<h3 style="padding-top: 20px; color: dimgray;">All Samples</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @Html.ActionLink("Map to Collectors", "Map", "Generate", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
+        @*@Html.ActionLink("Send Notification", "SendEmailToCollector", "Generate", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })*@
+        @*<div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Send Notification
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                @Html.ActionLink("Email Only", "SendEmailToCollector", "Generate", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                <a class="dropdown-item" href="#">SMS Only</a>
+                <a class="dropdown-item" href="#">Email and SMS</a>
+            </div>
+        </div>*@
+     
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <table id="samplesStatusId" class="table table-responsive table-hover table-striped" style="display:table">
+            <thead>
+                <tr style="background-color: #346cb0;
+color: white;
+white-space: nowrap;">
+                    @*<th></th>*@
+                    <th>Identification Code</th>
+                    <th>Commodity</th>
+                    <th>Contaminant Type</th>
+                    <th>Laboratoty</th>
+                    <th>Collector</th>
+                    <th>Status</th>
+                    <th>Generated Date</th>
+                    <th>Designer Notes</th>
+                    <th>Collector Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @*<td>
+                            @Html.ActionLink("Map to collector", "Edit", new { disabled = "disabled", id = item.labSampleId })
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.identityCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.commodity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.contaminantType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.laboratoty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.collector)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.generatedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.designerNotes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.collectionNotes)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#samplesStatusId").DataTable();
+    });
+</script>

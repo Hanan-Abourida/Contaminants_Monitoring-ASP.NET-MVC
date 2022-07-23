@@ -1,0 +1,68 @@
+﻿@model  Contaminants_Monitoring.ViewModels.ImportSamplesViewModel
+@{
+    ViewBag.Title = "Import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Import";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/Content/DataTables/css/dataTables.jqueryui.css" rel="stylesheet" />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Import Excel Data</li>
+    </ol>
+</nav>
+<h3 style="padding-top: 20px; color: dimgray;">Import Excel Data</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-9">
+        @using (Html.BeginForm("UploadExcel", "Import", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
+        {
+            if (ViewBag.ShowError)
+            {
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Error!</strong> @ViewBag.ErrorMessage
+                </div>
+            }
+            if (ViewBag.ShowSuccess)
+            {
+                <div class="alert alert-info alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Success!</strong> The excel data was saved successfully.
+                </div>
+            }
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Upload" id="btnSubmit" class="btn btn-outline-success" />
+                </div>
+            </div>
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.Label("Specify Commodity: ", new { @class = "control-label col-md-4" })
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(m => m.fkCommodityId, new SelectList(Model.commodities, "pkCommodityId", "CommodityName"), "select", new { @class = "form-control", id = "CommodityChosenId" })
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="control-label col-md-4">Data File:</div>
+                    <div class="col-md-5 ">
+                        <input type="file" id="FileUpload" name="FileUpload" class="" />
+                    </div>
+                </div>
+                <br />
+                Download the file template: 
+                @Html.ActionLink("Template File", "DownloadAllImportTemplate", "Import",null,null)
+            </div>
+        }
+    </div>
+</div>
+

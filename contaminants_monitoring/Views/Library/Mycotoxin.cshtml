@@ -1,0 +1,122 @@
+﻿@model Contaminants_Monitoring.Models.Mycotoxin
+
+@{
+    ViewBag.Title = "Mycotoxin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h4>Mycotoxin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MycotoxinName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MycotoxinName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PTWI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PTWI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PTWI_unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PTWI_unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PTWI_ref)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PTWI_ref)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cancer_potency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cancer_potency)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cp_unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cp_unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cp_ref)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cp_ref)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BMDL10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BMDL10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BMDL10_uni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BMDL10_uni)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BMDL10_ref)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BMDL10_ref)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PMTDI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PMTDI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PMTDI_unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PMTDI_unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PMTDI_ref)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PMTDI_ref)
+        </dd>
+
+    </dl>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.pkMycotoxinId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
